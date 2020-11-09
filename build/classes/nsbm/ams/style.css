@@ -1,0 +1,19 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 9, 2020, 5:35:50 PM
+    Author     : Nimesh
+*/
+
+#btnmain { 
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+#btnmain:hover{
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.1) , 10,0,0,1 ); 
+    -fx-effect: outershadow( gaussian , rgba(0,0,0,0.1) , 20,0,0,0 );
+}
