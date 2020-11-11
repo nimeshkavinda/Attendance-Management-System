@@ -7,6 +7,9 @@ package nsbm.ams;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,6 +60,7 @@ public class SignupController implements Initializable {
     
     String selection;
     int selectedIndex;
+    DatabaseConnection con;
 
     /**
      * Initializes the controller class.
@@ -67,6 +71,19 @@ public class SignupController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         comboAccType.setItems(list);
+        con = new DatabaseConnection();
+        
+        if(con == null){
+            
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Connection error");
+            alert.setHeaderText("Ah oh!");
+            alert.setContentText("Looks like the database connection is not available");
+
+            alert.showAndWait();
+            
+        }
+        
     }    
 
     @FXML
@@ -125,7 +142,7 @@ public class SignupController implements Initializable {
             else if(!fname.matches("^[a-zA-Z]+$") || !lname.matches("^[a-zA-Z]+$")){
                 
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Invalid input");
+                alert.setTitle("Invalid data");
                 alert.setHeaderText(null);
                 alert.setContentText("Name must contain only letters");
 
@@ -135,42 +152,77 @@ public class SignupController implements Initializable {
             else if(!txtPass.getText().equals(txtConPass.getText())){
             
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Invalid input");
+                alert.setTitle("Invalid data");
                 alert.setHeaderText("Make sure the passwords match");
                 alert.setContentText("Password must contain minimum of 6 chracters");
 
                 alert.showAndWait();
                 
             }
-            else if(!email.matches("([a-zA-Z0-9\\.]{5,15})\\@nsbm[\\.]lk")){
+            else if(selectedIndex == 0 && !(selectedIndex == -1) && !email.matches("([a-zA-Z0-9\\.]{1,20})\\@nsbm[\\.]lk")){
                 
-                if(!(selectedIndex == 0) && !(selectedIndex == -1)){
-                
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Invalid input");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Your email username should have minimum of 5 chracters and maximum of 15 characters and should end with nsbm.lk domain");
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Invalid data");
+                alert.setHeaderText("You are required to use NSBM provided email to sign up as an admin");
+                alert.setContentText("Email should be ending with nsbm.lk domain suffix");
 
-                    alert.showAndWait();
+                alert.showAndWait();
+                
+            }
+            else if(selectedIndex == 1 && !(selectedIndex == -1) && !email.matches("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$")){
+                
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Invalid data");
+                alert.setHeaderText(null);
+                alert.setContentText("Email should be valid");
+
+                alert.showAndWait();
+                
+            }
+            else{
+                
+                Connection conn = DatabaseConnection.ConnectDatabase();
+                
+                if(conn != null){
+                    
+                    try{
+                        
+                        PreparedStatement ps;
+                        ps = (PreparedStatement)
+                                conn.prepareStatement("insert into employee (fname, lname, email, password, access_lvl) values (?,?,?,?,"+selectedIndex+")");
+                        
+                        ps.setString(1, fname);
+                        ps.setString(2, lname);
+                        ps.setString(3, email);
+                        ps.setString(4, pass);
+                        
+                        int res = ps.executeUpdate();
+                        
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Success");
+                        alert.setHeaderText("Account creation successful");
+                        alert.setContentText("Please log in");
+
+                        alert.showAndWait();
+                        
+                    }
+                    catch(SQLException ex){
+                        
+                        System.out.println(ex);
+                        
+                    }
                     
                 }
                 else{
                     
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Invalid input");
-                    alert.setHeaderText("You are required to use NSBM provided email to sign up as an admin");
-                    alert.setContentText("Your email username should have minimum of 5 chracters and maximum of 15 characters and should end with nsbm.lk domain");
-
-                    alert.showAndWait(); 
+                    System.out.println("db issue");
                     
                 }
                 
             }
-            else{
-                System.out.println("working");
-            }
-        }
         
+        }
     }
-    
 }
+    
+
