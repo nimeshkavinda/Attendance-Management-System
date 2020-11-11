@@ -23,8 +23,8 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button id="btnmain" fx:id="btnAdmin" layoutX="55.0" layoutY="200.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="330.0" style="-fx-background-image: url('resources/img/btnadmin.png');" />
-      <Button id="btnmain" fx:id="btnUser" layoutX="55.0" layoutY="300.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="330.0" style="-fx-background-image: url('resources/img/btnuser.png');" />
+      <Button id="btnmain" fx:id="btnAdmin" layoutX="55.0" layoutY="200.0" mnemonicParsing="false" onAction="#loginAsAdmin" prefHeight="80.0" prefWidth="330.0" style="-fx-background-image: url('resources/img/btnadmin.png');" />
+      <Button id="btnmain" fx:id="btnUser" layoutX="55.0" layoutY="300.0" mnemonicParsing="false" onAction="#loginAsUser" prefHeight="80.0" prefWidth="330.0" style="-fx-background-image: url('resources/img/btnuser.png');" />
       <Hyperlink fx:id="linkSignup" layoutX="225.0" layoutY="396.0" onAction="#toSignup" text="Sign Up">
          <font>
             <Font size="14.0" />

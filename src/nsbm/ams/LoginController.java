@@ -24,8 +24,6 @@ import javafx.scene.layout.Pane;
 public class LoginController implements Initializable {
 
     @FXML
-    private Pane paneMain;
-    @FXML
     private Button btnAdmin;
     @FXML
     private Button btnUser;
@@ -48,6 +46,18 @@ public class LoginController implements Initializable {
     private void toSignup(ActionEvent event) throws IOException {
         Pane paneSignup = FXMLLoader.load(getClass().getResource("Signup.fxml"));
         paneLogin.getChildren().setAll(paneSignup);
+    }
+
+    @FXML
+    private void loginAsAdmin(ActionEvent event) throws IOException {
+        Pane paneAdminLogin = FXMLLoader.load(getClass().getResource("AdminLogin.fxml"));
+        paneLogin.getChildren().setAll(paneAdminLogin);
+    }
+
+    @FXML
+    private void loginAsUser(ActionEvent event) throws IOException {
+        Pane paneUserLogin = FXMLLoader.load(getClass().getResource("UserLogin.fxml"));
+        paneLogin.getChildren().setAll(paneUserLogin);
     }
     
 }
