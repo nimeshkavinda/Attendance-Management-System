@@ -8,12 +8,11 @@ package nsbm.ams;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.Pane;
 
 /**
@@ -21,18 +20,10 @@ import javafx.scene.layout.Pane;
  *
  * @author Nimesh
  */
-public class LoginController implements Initializable {
+public class WelcomeController implements Initializable {
 
     @FXML
     private Pane paneMain;
-    @FXML
-    private Button btnAdmin;
-    @FXML
-    private Button btnUser;
-    @FXML
-    private Hyperlink linkSignup;
-    @FXML
-    private Pane paneLogin;
 
     /**
      * Initializes the controller class.
@@ -42,12 +33,13 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Pane paneLogin = null;
+        try {
+            paneLogin = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        paneMain.getChildren().setAll(paneLogin);
     }    
-
-    @FXML
-    private void toSignup(ActionEvent event) throws IOException {
-        Pane paneSignup = FXMLLoader.load(getClass().getResource("Signup.fxml"));
-        paneLogin.getChildren().setAll(paneSignup);
-    }
     
 }
