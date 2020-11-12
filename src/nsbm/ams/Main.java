@@ -16,11 +16,11 @@ import javafx.stage.Stage;
  *
  * @author Nimesh
  */
-public class NSBMAMS extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Welcome.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         
         Scene scene = new Scene(root,800,600);
         stage.setTitle("Attendance Management System");

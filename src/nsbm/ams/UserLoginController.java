@@ -16,13 +16,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -66,7 +71,7 @@ public class UserLoginController implements Initializable {
     }
 
     @FXML
-    private void loginUser(ActionEvent event) {
+    private void loginUser(ActionEvent event) throws IOException {
         
         String email = txtEmail.getText();
         String pass = txtPass.getText();
@@ -99,24 +104,34 @@ public class UserLoginController implements Initializable {
                 
                 String qry = "select * from employee where email = ? and password = ?";
                 
-                try
-                {
+                try{
                     ps = con.prepareStatement(qry);
                     ps.setString(1, email);
                     ps.setString(2, pass);
                     rs = ps.executeQuery();
                     
-                    if (rs.next())
-                    {
-                        System.out.println("user found");
+                    if (rs.next()){
+                        
+                        Scan scan = new Scan(email);
+                        scan.setVisible(true);
+                        
+                        Stage stage = (Stage) btnLogin.getScene().getWindow();
+                        stage.close();
+                        
                     }
-                    else
-                    {
-                        System.out.println("no user");
+                    else{
+                            
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Invalid data");
+                        alert.setHeaderText("There's no matching user");
+                        alert.setContentText("Make sure your email and password combination is correct");
+
+                        alert.showAndWait();
                     }
                 }
                 catch (SQLException ex)
                 {
+                    ex.printStackTrace();
                 }
             }
         }
