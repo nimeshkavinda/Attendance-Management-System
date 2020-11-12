@@ -8,8 +8,6 @@ package nsbm.ams;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -26,37 +24,13 @@ public class DatabaseConnection {
         Connection con = null;
         
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(db_url,username,password);
             return con;
         }
-        catch (Exception ex) {
+        catch (ClassNotFoundException | SQLException ex) {
             return null;
         }
-        
-        
-    }
-    
-//    public static Connection getConnection(){
-//        
-//        Connection conn = null;
-//    
-//    try{
-//        Class.forName("com.mysql.jdbc.Driver");
-//    }
-//    catch(ClassNotFoundException ex){
-//        Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-//    }
-//                    
-//    try {
-//        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/nsbm_ams?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
-//    }
-//    catch (SQLException ex) {
-//        Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-//    }
-//
-//    return conn;
-//        
-//    }    
-//                     
+            
+    }                     
 }

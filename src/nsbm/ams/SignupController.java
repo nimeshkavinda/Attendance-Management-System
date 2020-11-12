@@ -71,18 +71,7 @@ public class SignupController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         comboAccType.setItems(list);
-        con = new DatabaseConnection();
-        
-        if(con == null){
-            
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Connection error");
-            alert.setHeaderText("Ah oh!");
-            alert.setContentText("Looks like the database connection is not available");
-
-            alert.showAndWait();
-            
-        }
+        con = new DatabaseConnection();    
         
     }    
 
@@ -211,11 +200,25 @@ public class SignupController implements Initializable {
                         System.out.println(ex);
                         
                     }
+                    finally{
+                        
+                        txtFName.clear();
+                        txtLName.clear();
+                        txtEmail.clear();
+                        txtPass.clear();
+                        txtConPass.clear();
+                        
+                    }
                     
                 }
                 else{
                     
-                    System.out.println("db issue");
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Connection error");
+                    alert.setHeaderText("Ah oh!");
+                    alert.setContentText("Looks like the database connection is not available");
+
+                    alert.showAndWait();
                     
                 }
                 

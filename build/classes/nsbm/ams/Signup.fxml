@@ -62,17 +62,17 @@
       </Label>
       <ComboBox fx:id="comboAccType" layoutX="55.0" layoutY="365.0" prefHeight="25.0" prefWidth="160.0" promptText="Select role" />
       <Label layoutX="55.0" layoutY="410.0" text="By clicking Sign Up, you agree to our Terms and Conditions." />
-      <Button fx:id="btnSignup" layoutX="55.0" layoutY="440.0" mnemonicParsing="false" onAction="#createAcc" prefHeight="30.0" prefWidth="85.0" text="Sign Up">
+      <Button fx:id="btnSignup" layoutX="295.0" layoutY="440.0" mnemonicParsing="false" onAction="#createAcc" prefHeight="30.0" prefWidth="85.0" text="Sign Up">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Label layoutX="154.0" layoutY="445.0" text="Already have an account?">
+      <Label layoutX="56.0" layoutY="445.0" text="Already have an account?">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Hyperlink fx:id="linkLogin" layoutX="315.0" layoutY="441.0" onAction="#toLogin" text="Login">
+      <Hyperlink fx:id="linkLogin" layoutX="215.0" layoutY="441.0" onAction="#toLogin" text="Login">
          <font>
             <Font size="14.0" />
          </font>
