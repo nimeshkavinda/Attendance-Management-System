@@ -10,6 +10,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -114,9 +115,8 @@ public class UserLoginController implements Initializable {
                         System.out.println("no user");
                     }
                 }
-                catch (Exception ex)
+                catch (SQLException ex)
                 {
-                    ex.printStackTrace();
                 }
             }
         }
