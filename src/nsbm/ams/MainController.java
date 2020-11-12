@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
  *
  * @author Nimesh
  */
-public class WelcomeController implements Initializable {
+public class MainController implements Initializable {
 
     @FXML
     private Pane paneMain;
@@ -37,7 +37,7 @@ public class WelcomeController implements Initializable {
         try {
             paneLogin = FXMLLoader.load(getClass().getResource("Login.fxml"));
         } catch (IOException ex) {
-            Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
         paneMain.getChildren().setAll(paneLogin);
     }    
