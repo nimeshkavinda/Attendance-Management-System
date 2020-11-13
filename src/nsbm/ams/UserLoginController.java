@@ -16,18 +16,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javax.swing.JFrame;
 
 /**
  * FXML Controller class
@@ -114,6 +111,8 @@ public class UserLoginController implements Initializable {
                         
                         Scan scan = new Scan(email);
                         scan.setVisible(true);
+                        scan.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+                        scan.setUndecorated(true);
                         
                         Stage stage = (Stage) btnLogin.getScene().getWindow();
                         stage.close();
