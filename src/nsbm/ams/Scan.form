@@ -54,9 +54,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="panelUser" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="panelDashboard" min="-2" pref="350" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="panelScan" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -90,7 +90,7 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
-                          <Component id="lblUser" alignment="3" pref="30" max="32767" attributes="0"/>
+                          <Component id="lblUser" alignment="3" pref="31" max="32767" attributes="0"/>
                           <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnSignout" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -148,11 +148,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panelInfo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="panelInfo" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="panelStatus" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -410,7 +410,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="355" max="32767" attributes="0"/>
+                          <EmptySpace pref="500" max="32767" attributes="0"/>
                           <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
@@ -434,7 +434,6 @@
                         <Font bold="true" component="lblStatus" property="font" relativeSize="true" size="24"/>
                       </FontInfo>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Student"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -468,7 +467,7 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
                   <FontInfo relative="true">
-                    <Font component="txtID" property="font" relativeSize="true" size="60"/>
+                    <Font component="txtID" property="font" relativeSize="true" size="57"/>
                   </FontInfo>
                 </Property>
               </Properties>
