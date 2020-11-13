@@ -61,7 +61,7 @@
          </font>
       </Label>
       <ComboBox fx:id="comboAccType" layoutX="55.0" layoutY="365.0" prefHeight="25.0" prefWidth="160.0" promptText="Select role" />
-      <Label layoutX="55.0" layoutY="410.0" text="By clicking Sign Up, you agree to our Terms and Conditions." />
+      <Label layoutX="55.0" layoutY="410.0" text="By clicking sign up, you agree to our policies." />
       <Button fx:id="btnSignup" layoutX="295.0" layoutY="440.0" mnemonicParsing="false" onAction="#createAcc" prefHeight="30.0" prefWidth="85.0" text="Sign Up">
          <font>
             <Font size="14.0" />

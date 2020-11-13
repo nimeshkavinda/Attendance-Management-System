@@ -111,11 +111,10 @@ public class UserLoginController implements Initializable {
                         
                         Scan scan = new Scan(email);
                         scan.setVisible(true);
-                        scan.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-                        scan.setUndecorated(true);
-                        
+                        scan.setExtendedState(JFrame.MAXIMIZED_BOTH);
                         Stage stage = (Stage) btnLogin.getScene().getWindow();
                         stage.close();
+                        
                         
                     }
                     else{
