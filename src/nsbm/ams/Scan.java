@@ -6,9 +6,13 @@
 package nsbm.ams;
 
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import static javax.swing.JOptionPane.showMessageDialog;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+import javax.swing.JFrame;
 
 /**
  *
@@ -22,11 +26,15 @@ public class Scan extends javax.swing.JFrame {
     
     String useremail;
     String studentid;
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
     
     public Scan(String email) {
         initComponents();
         useremail = email;
         lblUser.setText(useremail);
+        lblStatus.setText("Please scan your ID");
         txtID.requestFocusInWindow();
     }
 
@@ -274,18 +282,40 @@ public class Scan extends javax.swing.JFrame {
             
             if(!studentid.matches("^[0-9]*$")){
                 
-                lblStatus.setText("Student ID can only contain integers between 0-9");
+                lblStatus.setText("ID must contain integers between 0-9");
                 
             }
             else{
                 
                 if(studentid.length() != 10){
                     
-                    lblStatus.setText("Student ID must contain 10 characters");
+                    lblStatus.setText("ID must contain 10 characters");
                 }
                 else{
                     
-                    lblStatus.setText("Student");
+                    con = DatabaseConnection.ConnectDatabase();
+                
+                    String qry = "select * from student where stdid = ?";
+
+                    try{
+                        ps = con.prepareStatement(qry);
+                        ps.setString(1, studentid);
+                        rs = ps.executeQuery();
+
+                        if (rs.next()){
+                            
+                            lblStatus.setText("Student");
+
+                        }
+                        else{
+
+                            lblStatus.setText("Invalid");
+                        }
+                    }
+                    catch (SQLException ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
                 
             }
