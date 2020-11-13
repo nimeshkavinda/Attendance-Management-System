@@ -5,8 +5,10 @@
  */
 package nsbm.ams;
 
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -19,6 +21,7 @@ public class Scan extends javax.swing.JFrame {
      */
     
     String useremail;
+    String studentid;
     
     public Scan(String email) {
         initComponents();
@@ -63,7 +66,6 @@ public class Scan extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setName("Scan"); // NOI18N
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
 
         jPanelUser.setFocusable(false);
@@ -180,10 +182,10 @@ public class Scan extends javax.swing.JFrame {
         );
         jPanelStatusLayout.setVerticalGroup(
             jPanelStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelStatusLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelStatusLayout.createSequentialGroup()
+                .addGap(151, 151, 151)
                 .addComponent(lblStatus)
-                .addGap(158, 158, 158))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelDashboardLayout = new javax.swing.GroupLayout(jPanelDashboard);
@@ -204,6 +206,11 @@ public class Scan extends javax.swing.JFrame {
         );
 
         txtID.setFont(txtID.getFont().deriveFont(txtID.getFont().getSize()+60f));
+        txtID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIDKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelScanLayout = new javax.swing.GroupLayout(jPanelScan);
         jPanelScan.setLayout(jPanelScanLayout);
@@ -258,6 +265,33 @@ public class Scan extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void txtIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            
+            studentid = txtID.getText();
+            
+            if(!studentid.matches("^[0-9]*$")){
+                
+                lblStatus.setText("Student ID can only contain integers between 0-9");
+                
+            }
+            else{
+                
+                if(studentid.length() != 10){
+                    
+                    lblStatus.setText("Student ID must contain 10 characters");
+                }
+                else{
+                    
+                    lblStatus.setText("Student");
+                }
+                
+            }
+            
+        }
+    }//GEN-LAST:event_txtIDKeyPressed
 
     /**
      * @param args the command line arguments
