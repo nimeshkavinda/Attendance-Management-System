@@ -6,20 +6,12 @@
 package nsbm.ams;
 
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-import javax.swing.JFrame;
+import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -30,6 +22,9 @@ public class Scan extends javax.swing.JFrame {
     /**
      * Creates new form Scan
      */
+    
+    @FXML
+    private Pane paneMain;
     
     String useremail;
     String studentid;
@@ -144,7 +139,7 @@ public class Scan extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(btnClose)
                     .addComponent(btnSignout))
                 .addGap(38, 38, 38))
@@ -265,14 +260,13 @@ public class Scan extends javax.swing.JFrame {
         );
 
         lblStatus.setFont(lblStatus.getFont().deriveFont(lblStatus.getFont().getStyle() | java.awt.Font.BOLD, lblStatus.getFont().getSize()+24));
-        lblStatus.setText("Student");
 
         javax.swing.GroupLayout panelStatusLayout = new javax.swing.GroupLayout(panelStatus);
         panelStatus.setLayout(panelStatusLayout);
         panelStatusLayout.setHorizontalGroup(
             panelStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelStatusLayout.createSequentialGroup()
-                .addContainerGap(355, Short.MAX_VALUE)
+                .addContainerGap(500, Short.MAX_VALUE)
                 .addComponent(lblStatus)
                 .addGap(56, 56, 56))
         );
@@ -290,7 +284,7 @@ public class Scan extends javax.swing.JFrame {
             panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDashboardLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -301,7 +295,7 @@ public class Scan extends javax.swing.JFrame {
             .addComponent(panelStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        txtID.setFont(txtID.getFont().deriveFont(txtID.getFont().getSize()+60f));
+        txtID.setFont(txtID.getFont().deriveFont(txtID.getFont().getSize()+57f));
         txtID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtIDKeyPressed(evt);
@@ -371,6 +365,14 @@ public class Scan extends javax.swing.JFrame {
             if(!studentid.matches("^[0-9]*$")){
                 
                 lblStatus.setText("ID must contain integers between 0-9");
+                txtID.setText("");
+                lblName.setText("");
+                lblStdID.setText("");
+                lblEmail.setText("");
+                lblNic.setText("");
+                lblBatch.setText("");
+                lblFaculty.setText("");
+                lblDegree.setText("");
                 
             }
             else{
@@ -378,6 +380,15 @@ public class Scan extends javax.swing.JFrame {
                 if(studentid.length() != 10){
                     
                     lblStatus.setText("ID must contain 10 characters");
+                    txtID.setText("");
+                    lblName.setText("");
+                    lblStdID.setText("");
+                    lblEmail.setText("");
+                    lblNic.setText("");
+                    lblBatch.setText("");
+                    lblFaculty.setText("");
+                    lblDegree.setText("");
+                    
                 }
                 else{
                     
@@ -400,7 +411,6 @@ public class Scan extends javax.swing.JFrame {
                             faculty = rs.getString("faculty");
                             degree = rs.getString("degree");
                             
-                            
                             lblStatus.setText("Student");
                             lblName.setText(fname + " " + lname);
                             lblStdID.setText(studentid);
@@ -414,6 +424,15 @@ public class Scan extends javax.swing.JFrame {
                         else{
 
                             lblStatus.setText("Invalid");
+                            txtID.setText("");
+                            lblName.setText("");
+                            lblStdID.setText("");
+                            lblEmail.setText("");
+                            lblNic.setText("");
+                            lblBatch.setText("");
+                            lblFaculty.setText("");
+                            lblDegree.setText("");
+                            
                         }
                     }
                     catch (SQLException ex)
@@ -433,8 +452,8 @@ public class Scan extends javax.swing.JFrame {
 
     private void btnSignoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignoutActionPerformed
         // TODO add your handling code here:
-        
-        
+        this.dispose();      
+          
     }//GEN-LAST:event_btnSignoutActionPerformed
 
     /**

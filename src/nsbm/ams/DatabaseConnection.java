@@ -29,6 +29,7 @@ public class DatabaseConnection {
             return con;
         }
         catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
             return null;
         }
             

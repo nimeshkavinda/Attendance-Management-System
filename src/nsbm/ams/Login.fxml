@@ -6,25 +6,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsbm.ams.LoginController">
+<AnchorPane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsbm.ams.LoginController">
    <children>
       <Label layoutX="55.0" layoutY="400.0" text="Don't have an account yet?">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="55.0" layoutY="110.0" text="Login">
+      <Label layoutX="55.0" layoutY="125.0" text="Get started">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="55.0" layoutY="140.0" text="Select your role from below to get started">
+      <Label layoutX="55.0" layoutY="155.0" text="Select a service to login">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button id="btnmain" fx:id="btnAdmin" layoutX="55.0" layoutY="200.0" mnemonicParsing="false" onAction="#loginAsAdmin" prefHeight="80.0" prefWidth="330.0" style="-fx-background-image: url('resources/img/btnadmin.png');" />
-      <Button id="btnmain" fx:id="btnUser" layoutX="55.0" layoutY="300.0" mnemonicParsing="false" onAction="#loginAsUser" prefHeight="80.0" prefWidth="330.0" style="-fx-background-image: url('resources/img/btnuser.png');" />
+      <Button id="btnmain" fx:id="btnAdmin" layoutX="55.0" layoutY="200.0" mnemonicParsing="false" onAction="#loginAsAdmin" prefHeight="80.0" prefWidth="330.0" style="-fx-background-image: url('resources/img/btndashboard.png');" />
+      <Button id="btnmain" fx:id="btnUser" layoutX="55.0" layoutY="300.0" mnemonicParsing="false" onAction="#loginAsUser" prefHeight="80.0" prefWidth="330.0" style="-fx-background-image: url('resources/img/btnscan.png');" />
       <Hyperlink fx:id="linkSignup" layoutX="225.0" layoutY="396.0" onAction="#toSignup" text="Sign Up">
          <font>
             <Font size="14.0" />
