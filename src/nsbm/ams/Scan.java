@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -20,6 +22,9 @@ public class Scan extends javax.swing.JFrame {
     /**
      * Creates new form Scan
      */
+    
+    @FXML
+    private Pane paneMain;
     
     String useremail;
     String studentid;
@@ -447,8 +452,8 @@ public class Scan extends javax.swing.JFrame {
 
     private void btnSignoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignoutActionPerformed
         // TODO add your handling code here:
-        
-        
+        this.dispose();      
+          
     }//GEN-LAST:event_btnSignoutActionPerformed
 
     /**
