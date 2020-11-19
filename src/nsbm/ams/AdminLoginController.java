@@ -12,12 +12,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -57,11 +61,20 @@ public class AdminLoginController implements Initializable {
     }
 
     @FXML
-    private void loginAdmin(ActionEvent event) {
+    private void loginAdmin(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+        Stage dashboard = (Stage)((Node) event.getSource()).getScene().getWindow();
+        dashboard.setScene(new Scene(root,1200, 800));
+        dashboard.show();
+        dashboard.centerOnScreen();
+        Stage stage = (Stage) btnLogin.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
-    private void toSignup(ActionEvent event) {
+    private void toSignup(ActionEvent event) throws IOException {
+        Pane paneSignup = FXMLLoader.load(getClass().getResource("Signup.fxml"));
+        paneAdminLogin.getChildren().setAll(paneSignup);
     }
     
 }

@@ -436,6 +436,7 @@ public class Scan extends javax.swing.JFrame {
                             day = c.get(Calendar.DAY_OF_WEEK);
                             
                             MarkAttendance markatd = new MarkAttendance(studentid, datetime, day);
+                            
 
                         }
                         else{
