@@ -64,11 +64,11 @@ public class AdminLoginController implements Initializable {
     private void loginAdmin(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
         Stage dashboard = (Stage)((Node) event.getSource()).getScene().getWindow();
-        dashboard.setScene(new Scene(root,1200, 800));
+        dashboard.setScene(new Scene(root,1200, 700));
         dashboard.show();
         dashboard.centerOnScreen();
-        Stage stage = (Stage) btnLogin.getScene().getWindow();
-        stage.close();
+        dashboard.setTitle("Attendance Management System");
+        dashboard.setResizable(false);
     }
 
     @FXML
