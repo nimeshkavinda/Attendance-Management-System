@@ -13,30 +13,31 @@
    <children>
       <Pane fx:id="paneNav" prefHeight="130.0" prefWidth="1200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="570.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="75.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="picProfile" fitHeight="60.0" fitWidth="60.0" layoutX="75.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../resources/img/dp.png" />
                </image></ImageView>
-            <Label layoutX="155.0" layoutY="48.0" text="Good Morning">
+            <Label fx:id="lblGreeting" layoutX="155.0" layoutY="48.0">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="318.0" layoutY="48.0" text="Nimesh Kavinda">
+            <Label fx:id="lblName" layoutX="335.0" layoutY="48.0">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Hyperlink layoutX="1075.0" layoutY="54.0" text="Sign Out" />
-            <Hyperlink layoutX="977.0" layoutY="54.0" text="Manage Account" />
+            <Hyperlink fx:id="linkSignout" layoutX="1075.0" layoutY="54.0" onAction="#toLogin" text="Sign Out" />
+            <Hyperlink fx:id="linkManageacc" layoutX="977.0" layoutY="54.0" text="Manage Account" />
          </children>
       </Pane>
-      <Pane fx:id="paneMenu" layoutY="130.0" prefHeight="570.0" prefWidth="1200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+      <Pane fx:id="paneMenu" layoutY="130.0" prefHeight="570.0" prefWidth="900.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0">
          <children>
             <Button id="btnmenu" layoutX="75.0" layoutY="15.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="500.0" style="-fx-background-image: url('resources/img/btnstudentreg.png');" />
             <Button id="btnmenu" layoutX="75.0" layoutY="270.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="775.0" style="-fx-background-image: url('resources/img/btnreport.png');" />
             <Button id="btnmenu" layoutX="600.0" layoutY="15.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="250.0" style="-fx-background-image: url('resources/img/btnresource.png');" />
          </children>
       </Pane>
+      <Pane fx:id="paneUpdates" layoutX="900.0" layoutY="130.0" prefHeight="570.0" prefWidth="300.0" style="-fx-background-image: url('resources/img/notification.png');" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0" />
    </children>
 </AnchorPane>
