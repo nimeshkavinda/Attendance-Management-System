@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-image: url('resources/img/dashboard.png'); -fx-background-color: #FFFFFF;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsbm.ams.DashboardController">
    <children>
-      <Pane fx:id="paneNav" prefHeight="130.0" prefWidth="1200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="570.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="paneNav" prefHeight="130.0" prefWidth="900.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="570.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="picProfile" fitHeight="60.0" fitWidth="60.0" layoutX="75.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -27,8 +27,8 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Hyperlink fx:id="linkSignout" layoutX="1075.0" layoutY="54.0" onAction="#toLogin" text="Sign Out" />
-            <Hyperlink fx:id="linkManageacc" layoutX="977.0" layoutY="54.0" text="Manage Account" />
+            <Hyperlink fx:id="linkSignout" layoutX="790.0" layoutY="54.0" onAction="#toLogin" text="Sign Out" />
+            <Hyperlink fx:id="linkManageacc" layoutX="685.0" layoutY="54.0" onAction="#toManageAcc" text="Manage Account" />
          </children>
       </Pane>
       <Pane fx:id="paneMenu" layoutY="130.0" prefHeight="570.0" prefWidth="900.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0">
@@ -38,6 +38,6 @@
             <Button id="btnmenu" layoutX="600.0" layoutY="15.0" mnemonicParsing="false" prefHeight="230.0" prefWidth="250.0" style="-fx-background-image: url('resources/img/btnresource.png');" />
          </children>
       </Pane>
-      <Pane fx:id="paneUpdates" layoutX="900.0" layoutY="130.0" prefHeight="570.0" prefWidth="300.0" style="-fx-background-image: url('resources/img/notification.png');" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0" />
+      <Pane fx:id="paneUpdates" layoutX="900.0" prefHeight="700.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

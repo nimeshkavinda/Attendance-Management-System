@@ -178,12 +178,13 @@ public class SignupController implements Initializable {
                         
                         PreparedStatement ps;
                         ps = (PreparedStatement)
-                                conn.prepareStatement("insert into employee (fname, lname, email, password, access_lvl) values (?,?,?,?,"+selectedIndex+")");
+                                conn.prepareStatement("insert into employee (fname, lname, email, mobile, password, access_lvl) values (?,?,?,?,?,"+selectedIndex+")");
                         
                         ps.setString(1, fname);
                         ps.setString(2, lname);
                         ps.setString(3, email);
-                        ps.setString(4, pass);
+                        ps.setString(4, "");
+                        ps.setString(5, pass);
                         
                         int res = ps.executeUpdate();
                         

@@ -66,11 +66,8 @@ public class DashboardController implements Initializable {
         else if(timeOfDay >= 12 && timeOfDay < 16){
             lblGreeting.setText("Good Afternoon"); 
         }
-        else if(timeOfDay >= 16 && timeOfDay < 21){
+        else if(timeOfDay >= 16 && timeOfDay < 24){
             lblGreeting.setText("Good Evening"); 
-        }
-        else if(timeOfDay >= 21 && timeOfDay < 24){
-            lblGreeting.setText("Good Night"); 
         }
         else{
             lblGreeting.setText("Hello There");
@@ -90,6 +87,12 @@ public class DashboardController implements Initializable {
         stage.centerOnScreen();
         stage.setTitle("Attendance Management System");
         stage.setResizable(false);
+    }
+
+    @FXML
+    private void toManageAcc(ActionEvent event) throws IOException {
+        Pane paneManageAcc = FXMLLoader.load(getClass().getResource("ManageAccount.fxml"));
+        paneMenu.getChildren().setAll(paneManageAcc);
     }
     
 }
