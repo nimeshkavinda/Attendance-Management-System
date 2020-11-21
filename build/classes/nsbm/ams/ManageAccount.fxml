@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="paneManageAcc" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="900.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsbm.ams.ManageAccountController">
+   <children>
+      <Hyperlink fx:id="linkHome" layoutX="75.0" layoutY="20.0" onAction="#toHome" text="Home">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Hyperlink>
+      <Label layoutX="128.0" layoutY="24.0" text="&gt; Manage Account">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="75.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/img/dp.png" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="linkChangeDp" layoutX="75.0" layoutY="250.0" text="Change Profile Image">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="linkDelAcc" layoutX="75.0" layoutY="278.0" text="Delete Account">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Hyperlink>
+      <Label layoutX="345.0" layoutY="80.0" text="First Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="575.0" layoutY="80.0" text="Last Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtFName" layoutX="345.0" layoutY="112.0" prefHeight="25.0" prefWidth="200.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtLName" layoutX="575.0" layoutY="112.0" prefHeight="25.0" prefWidth="200.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="345.0" layoutY="155.0" text="Email">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEmail" layoutX="345.0" layoutY="187.0" prefHeight="25.0" prefWidth="430.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="345.0" layoutY="306.0" text="Password">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtPass" layoutX="345.0" layoutY="334.0" prefHeight="25.0" prefWidth="430.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </PasswordField>
+      <Label layoutX="345.0" layoutY="230.0" text="Mobile">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtMobile" layoutX="345.0" layoutY="262.0" prefHeight="25.0" prefWidth="430.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btnSave" layoutX="669.0" layoutY="461.0" mnemonicParsing="false" onAction="#saveChanges" text="Save Changes">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="345.0" layoutY="379.0" text="Confirm Password">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtConPass" layoutX="345.0" layoutY="407.0" prefHeight="25.0" prefWidth="430.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </PasswordField>
+   </children>
+</Pane>

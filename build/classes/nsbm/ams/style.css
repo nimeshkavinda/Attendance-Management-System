@@ -18,6 +18,16 @@ and open the template in the editor.
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.1) , 10,0,0,1 ); 
 }
 
+#btnmenu{
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-color: none;
+}
+
+#btnmenu:hover{
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 10,0,0,2 ); 
+}
+
 .button{
     -fx-background-color: #2959fc;
     -fx-text-fill: #ffffff;
