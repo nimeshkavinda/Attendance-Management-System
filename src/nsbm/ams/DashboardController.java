@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +37,6 @@ public class DashboardController implements Initializable {
     private Hyperlink linkSignout;
     @FXML
     private Hyperlink linkManageacc;
-    @FXML
     private Pane paneMenu;
     @FXML
     private Pane paneUpdates;
@@ -48,6 +49,10 @@ public class DashboardController implements Initializable {
     
     Calendar cal;
     int timeOfDay;
+    @FXML
+    private Label lblNameAlt;
+    @FXML
+    private Pane panePlaceholder;
 
     /**
      * Initializes the controller class.
@@ -57,6 +62,14 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Pane paneLogin = null;
+        try {
+            paneMenu = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        panePlaceholder.getChildren().setAll(paneMenu);
+        
         cal = Calendar.getInstance();
         timeOfDay = cal.get(Calendar.HOUR_OF_DAY);
 
@@ -75,7 +88,18 @@ public class DashboardController implements Initializable {
     }
 
     public void setName(String name){
-       lblName.setText(name);
+        if(timeOfDay >= 0 && timeOfDay < 12){
+            lblNameAlt.setText(name);      
+        }
+        else if(timeOfDay >= 12 && timeOfDay < 16){
+            lblName.setText(name);
+        }
+        else if(timeOfDay >= 16 && timeOfDay < 24){
+            lblNameAlt.setText(name); 
+        }
+        else{
+            lblNameAlt.setText(name);
+        }
     }
 
     @FXML
