@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -62,7 +63,7 @@ public class ManageAccountController implements Initializable {
     @FXML
     private PasswordField txtConPass;
     @FXML
-    private ImageView imgDp;
+    private Circle imgDp;
     
     PreparedStatement pstmt = null;
     Connection con = null;
@@ -97,7 +98,7 @@ public class ManageAccountController implements Initializable {
         File file = fileChooser.showOpenDialog(paneManageAcc.getScene().getWindow());
     if (file != null) {
         URL url = file.toURI().toURL();
-        imgDp.setImage(new Image(url.toExternalForm()));
+        
     }
     }
 

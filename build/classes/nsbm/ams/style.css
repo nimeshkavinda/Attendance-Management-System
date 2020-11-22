@@ -37,6 +37,10 @@ and open the template in the editor.
     -fx-background-color: #297dfc;
 }
 
+#imgDp{
+    -fx-background-radius: 10em;
+}
+
 /*.combo-box .list-cell 
 {
     -fx-background: white;
