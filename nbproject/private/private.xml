@@ -5,11 +5,13 @@
         <group>
             <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/AdminLoginController.java</file>
             <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/Scan.java</file>
-            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/Main.java</file>
+            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/ManageAccountController.java</file>
             <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/DashboardController.java</file>
             <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/MarkAttendance.java</file>
             <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/style.css</file>
-            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/SendEmail.java</file>
+            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/MenuController.java</file>
+            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/SignupController.java</file>
+            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/Menu.fxml</file>
         </group>
     </open-files>
 </project-private>

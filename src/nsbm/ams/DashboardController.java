@@ -45,14 +45,16 @@ public class DashboardController implements Initializable {
     @FXML
     private Label lblGreeting;
     @FXML
-     Label lblName;
-    
-    Calendar cal;
-    int timeOfDay;
+    Label lblName;
     @FXML
     private Label lblNameAlt;
     @FXML
     private Pane panePlaceholder;
+    
+    Calendar cal;
+    int timeOfDay;
+    String email;
+    static ManageAccountController accountctrl;
 
     /**
      * Initializes the controller class.
@@ -101,6 +103,10 @@ public class DashboardController implements Initializable {
             lblNameAlt.setText(name);
         }
     }
+    
+    public void setEmail(String empEmail){
+        email = empEmail;
+    }
 
     @FXML
     private void toLogin(ActionEvent event) throws IOException {
@@ -115,8 +121,11 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void toManageAcc(ActionEvent event) throws IOException {
-        Pane paneManageAcc = FXMLLoader.load(getClass().getResource("ManageAccount.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ManageAccount.fxml"));
+        Pane paneManageAcc = loader.load();
         paneMenu.getChildren().setAll(paneManageAcc);
+        accountctrl = (ManageAccountController)loader.getController();
+        accountctrl.setEmail(email);
     }
     
 }

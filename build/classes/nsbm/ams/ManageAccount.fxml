@@ -22,17 +22,17 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="75.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgDp" fitHeight="150.0" fitWidth="150.0" layoutX="75.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/img/dp.png" />
          </image>
       </ImageView>
-      <Hyperlink fx:id="linkChangeDp" layoutX="75.0" layoutY="250.0" text="Change Profile Image">
+      <Hyperlink fx:id="linkChangeDp" layoutX="75.0" layoutY="250.0" onAction="#UpdateDp" text="Change Profile Image">
          <font>
             <Font size="14.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="linkDelAcc" layoutX="75.0" layoutY="278.0" text="Delete Account">
+      <Hyperlink fx:id="linkDelAcc" layoutX="75.0" layoutY="278.0" onAction="#DeleteAcc" text="Delete Account">
          <font>
             <Font size="14.0" />
          </font>

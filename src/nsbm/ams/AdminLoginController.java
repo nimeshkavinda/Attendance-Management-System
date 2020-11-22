@@ -51,6 +51,7 @@ public class AdminLoginController implements Initializable {
     String fname;
     String lname;
     String flname;
+    String email;
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
@@ -75,7 +76,7 @@ public class AdminLoginController implements Initializable {
     @FXML
     private void loginAdmin(ActionEvent event) throws IOException {
 
-        String email = txtEmail.getText();
+        email = txtEmail.getText();
         String pass = txtPass.getText();
         
         if(event.getSource() == btnLogin){
@@ -125,10 +126,11 @@ public class AdminLoginController implements Initializable {
                         dashboard.show();
                         dashboard.centerOnScreen();
                         dashboard.setTitle("Attendance Management System");
-                        dashboard.setResizable(false);  
+                        dashboard.setResizable(false);
                         
                         DashboardController dashctrl = loader.getController();
                         dashctrl.setName(flname);
+                        dashctrl.setEmail(email);
                         
                     }
                     else{
