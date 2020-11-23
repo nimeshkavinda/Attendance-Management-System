@@ -11,8 +11,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,8 +29,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -65,16 +66,67 @@ public class ManageAccountController implements Initializable {
     @FXML
     private Circle imgDp;
     
+    String oldFName;
+    String oldLName;
+    String oldEmail;
+    String oldMobile;
     PreparedStatement pstmt = null;
     Connection con = null;
-    String email;
+    ResultSet rs = null;
+    String email = "test@nsbm.lk";
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        con = DatabaseConnection.ConnectDatabase();
+        
+        String populateFields = "select * from employee where email = '"+email+"'";
+        
+        try{
+            
+            pstmt = con.prepareStatement(populateFields);
+            rs = pstmt.executeQuery();
+            
+            if(rs.next()){
+                
+                oldFName = rs.getString("fname");
+                oldLName = rs.getString("lname");
+                oldEmail = rs.getString("email");
+                oldMobile = rs.getString("mobile");
+
+                txtFName.setText(oldFName);
+                txtLName.setText(oldLName);
+                txtEmail.setText(oldEmail);
+                txtMobile.setText(oldMobile);
+                
+            }
+            else{
+                
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Fetching error");
+                alert.setContentText("Couldn't fetch the existing data");
+
+                alert.showAndWait();
+                
+            }
+            
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public void setEmail(String empEmail){
@@ -88,7 +140,115 @@ public class ManageAccountController implements Initializable {
     }
 
     @FXML
-    private void saveChanges(ActionEvent event) {
+    private void saveChanges(ActionEvent event) throws SQLException {
+        
+        String newFName = txtFName.getText();
+        String newLName = txtLName.getText();
+        String newEmail = txtEmail.getText();
+        String mobile = txtMobile.getText();
+        String newPass = txtPass.getText();
+        
+        con = DatabaseConnection.ConnectDatabase();
+        
+        String qry = "update employee set fname = '"+newFName+"', lname = '"+newLName+"', email = '"+newEmail+"', mobile = '"+mobile+"', password = '"+newPass+"' where email = '"+email+"'";
+        
+        try{
+            
+            if(txtPass.getText() == null || txtPass.getText().isEmpty() || txtConPass.getText() == null || txtConPass.getText().isEmpty()){
+                
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Invalid data");
+                alert.setHeaderText("Something is missing");
+                alert.setContentText("Make sure you have filled the passwords");
+
+                alert.showAndWait();
+                
+            }
+            else if(!txtPass.getText().equals(txtConPass.getText())){
+                
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Invalid data");
+                alert.setHeaderText("Invalid passwords");
+                alert.setContentText("Make sure the passwords match");
+
+                alert.showAndWait();
+                
+            }
+            else{
+                
+                pstmt = con.prepareStatement(qry);
+                int result = pstmt.executeUpdate();
+
+                if(result > 0) {
+                    
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Account update");
+                    alert.setHeaderText("Successful");
+                    alert.setContentText("Your information has been changed");
+
+                    alert.showAndWait();
+                    
+                }
+                else{
+                    
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Couldn't update");
+                    alert.setContentText("Failed to update your changes");
+
+                    alert.showAndWait();
+                    
+                }
+                
+            }
+            
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        finally{
+            
+            String populateFields = "select * from employee where email = '"+email+"'";
+        
+            try{
+
+                pstmt = con.prepareStatement(populateFields);
+                rs = pstmt.executeQuery();
+
+                if(rs.next()){
+
+                    oldFName = rs.getString("fname");
+                    oldLName = rs.getString("lname");
+                    oldEmail = rs.getString("email");
+                    oldMobile = rs.getString("mobile");
+
+                    txtFName.setText(oldFName);
+                    txtLName.setText(oldLName);
+                    txtEmail.setText(oldEmail);
+                    txtMobile.setText(oldMobile);
+                    txtPass.setText("");
+                    txtConPass.setText("");
+
+                }
+                else{
+
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Fetching error");
+                    alert.setContentText("Couldn't fetch the existing data");
+
+                    alert.showAndWait();
+
+                }
+
+            }
+            catch(SQLException ex){
+                ex.printStackTrace();
+            }
+            
+            con.close();
+        }
+        
     }
 
     @FXML
@@ -103,7 +263,7 @@ public class ManageAccountController implements Initializable {
     }
 
     @FXML
-    private void DeleteAcc(ActionEvent event) throws IOException {
+    private void DeleteAcc(ActionEvent event) throws IOException, SQLException {
         
         con = DatabaseConnection.ConnectDatabase();
         
@@ -147,6 +307,9 @@ public class ManageAccountController implements Initializable {
         }
         catch(SQLException ex){
             ex.printStackTrace();   
+        }
+        finally{
+            con.close();
         }
         
     }
