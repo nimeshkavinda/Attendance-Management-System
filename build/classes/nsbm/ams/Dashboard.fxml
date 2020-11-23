@@ -2,20 +2,15 @@
 
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-image: url('resources/img/dashboard.png'); -fx-background-color: #FFFFFF;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsbm.ams.DashboardController">
    <children>
       <Pane fx:id="paneNav" prefHeight="130.0" prefWidth="900.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="570.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="picProfile" fitHeight="60.0" fitWidth="60.0" layoutX="75.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../resources/img/dp.png" />
-               </image></ImageView>
             <Label fx:id="lblGreeting" layoutX="155.0" layoutY="48.0">
                <font>
                   <Font size="24.0" />
@@ -31,8 +26,14 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
+            <Label fx:id="lblNameAlt1" layoutX="320.0" layoutY="48.0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
             <Hyperlink fx:id="linkSignout" layoutX="790.0" layoutY="54.0" onAction="#toLogin" text="Sign Out" />
             <Hyperlink fx:id="linkManageacc" layoutX="685.0" layoutY="54.0" onAction="#toManageAcc" text="Manage Account" />
+            <Circle fx:id="picProfile" fill="WHITE" layoutX="105.0" layoutY="65.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: none;" />
          </children>
       </Pane>
       <Pane fx:id="panePlaceholder" layoutY="130.0" prefHeight="570.0" prefWidth="900.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0" />

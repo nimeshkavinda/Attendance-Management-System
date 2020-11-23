@@ -142,8 +142,8 @@ public class SignupController implements Initializable {
             
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Invalid data");
-                alert.setHeaderText("Make sure the passwords match");
-                alert.setContentText("Password must contain minimum of 6 chracters");
+                alert.setHeaderText("Invalid passwords");
+                alert.setContentText("Make sure the passwords match");
 
                 alert.showAndWait();
                 

@@ -37,7 +37,11 @@ and open the template in the editor.
     -fx-background-color: #297dfc;
 }
 
-.combo-box .list-cell 
+#imgDp{
+    -fx-background-radius: 10em;
+}
+
+/*.combo-box .list-cell 
 {
     -fx-background: white;
     -fx-background-color: transparent;
@@ -57,7 +61,7 @@ and open the template in the editor.
 {
     -fx-padding: 4 0 4 5;
 
-    /* No alternate highlighting */
+     No alternate highlighting 
     -fx-background-color: white;
 }
 
@@ -102,4 +106,4 @@ and open the template in the editor.
 
 .combo-box-base:disabled {
     -fx-opacity: .4;
-}
+}*/

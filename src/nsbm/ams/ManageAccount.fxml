@@ -5,9 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="paneManageAcc" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="900.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsbm.ams.ManageAccountController">
@@ -22,17 +21,13 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="75.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../resources/img/dp.png" />
-         </image>
-      </ImageView>
-      <Hyperlink fx:id="linkChangeDp" layoutX="75.0" layoutY="250.0" text="Change Profile Image">
+      <Circle id="imgDp" fx:id="imgDp" fill="DODGERBLUE" layoutX="150.0" layoutY="155.0" radius="75.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: none; -fx-fill: none;" />
+      <Hyperlink fx:id="linkChangeDp" layoutX="75.0" layoutY="250.0" onAction="#UpdateDp" text="Change Profile Image">
          <font>
             <Font size="14.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="linkDelAcc" layoutX="75.0" layoutY="278.0" text="Delete Account">
+      <Hyperlink fx:id="linkDelAcc" layoutX="75.0" layoutY="278.0" onAction="#DeleteAcc" text="Delete Account">
          <font>
             <Font size="14.0" />
          </font>

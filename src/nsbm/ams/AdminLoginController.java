@@ -51,6 +51,7 @@ public class AdminLoginController implements Initializable {
     String fname;
     String lname;
     String flname;
+    String email;
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
@@ -75,7 +76,7 @@ public class AdminLoginController implements Initializable {
     @FXML
     private void loginAdmin(ActionEvent event) throws IOException {
 
-        String email = txtEmail.getText();
+        email = txtEmail.getText();
         String pass = txtPass.getText();
         
         if(event.getSource() == btnLogin){
@@ -119,16 +120,17 @@ public class AdminLoginController implements Initializable {
                         flname = fname + " " + lname;
                         
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+                        
                         Parent root = loader.load();
+                        DashboardController dashctrl = loader.getController();
                         Stage dashboard = (Stage)((Node) event.getSource()).getScene().getWindow();
+                        dashctrl.setName(flname);
+                        dashctrl.setEmail(email);
                         dashboard.setScene(new Scene(root,1200, 700));
                         dashboard.show();
                         dashboard.centerOnScreen();
                         dashboard.setTitle("Attendance Management System");
-                        dashboard.setResizable(false);  
-                        
-                        DashboardController dashctrl = loader.getController();
-                        dashctrl.setName(flname);
+                        dashboard.setResizable(false);
                         
                     }
                     else{
