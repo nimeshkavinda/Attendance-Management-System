@@ -5,9 +5,15 @@
  */
 package nsbm.ams;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -16,6 +22,15 @@ import javafx.fxml.Initializable;
  */
 public class MenuController implements Initializable {
 
+    @FXML
+    private Pane paneMenu;
+    @FXML
+    private Button btnStudentRegister;
+    @FXML
+    private Button btnReport;
+    @FXML
+    private Button btnAllocate;
+
     /**
      * Initializes the controller class.
      */
@@ -23,5 +38,19 @@ public class MenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void registerStudent(ActionEvent event) throws IOException {
+        Pane paneStudentReg = FXMLLoader.load(getClass().getResource("RegisterStudent.fxml"));
+        paneMenu.getChildren().setAll(paneStudentReg);
+    }
+
+    @FXML
+    private void studentReport(ActionEvent event) {
+    }
+
+    @FXML
+    private void allocateResource(ActionEvent event) {
+    }
     
 }

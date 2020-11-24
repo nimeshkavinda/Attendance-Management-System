@@ -5,6 +5,7 @@
  */
 package nsbm.ams;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -146,8 +147,8 @@ public class DashboardController implements Initializable {
 
     public void refreshDp(String imgname) throws FileNotFoundException {
         imagename = imgname;
-        String doc = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
-        InputStream inputStream = new FileInputStream(doc + "/" + imagename + ".png");
+        File destDir = new File(new JFileChooser().getFileSystemView().getDefaultDirectory().toString());
+        InputStream inputStream = new FileInputStream(destDir + "/" + imagename + ".png");
         Image image = new Image(inputStream);
         picProfile.setFill(new ImagePattern(image));
     }
