@@ -69,6 +69,7 @@ public class DashboardController implements Initializable {
     String empemail;
     String empid;
     String flname;
+    String imagename;
 
     /**
      * Initializes the controller class.
@@ -145,8 +146,9 @@ public class DashboardController implements Initializable {
     }
 
     public void refreshDp(String imgname) throws FileNotFoundException {
-        String doc = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
-        InputStream inputStream = new FileInputStream(doc + "/" + imgname + ".png");
+        imagename = imgname;
+        File destDir = new File(new JFileChooser().getFileSystemView().getDefaultDirectory().toString());
+        InputStream inputStream = new FileInputStream(destDir + "/" + imagename + ".png");
         Image image = new Image(inputStream);
         picProfile.setFill(new ImagePattern(image));
     }

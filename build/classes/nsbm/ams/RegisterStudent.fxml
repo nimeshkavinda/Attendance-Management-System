@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsbm.ams.RegisterStudentController">
+<Pane fx:id="paneStudentReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsbm.ams.RegisterStudentController">
    <children>
       <Hyperlink fx:id="linkHome" layoutX="75.0" layoutY="20.0" onAction="#toHome" text="Home">
          <font>
@@ -18,5 +22,156 @@
             <Font size="16.0" />
          </font>
       </Label>
+      <Label layoutX="75.0" layoutY="101.0" text="First Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="166.0" text="Last Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtFName" layoutX="75.0" layoutY="127.0" prefHeight="30.0" prefWidth="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtLName" layoutX="75.0" layoutY="193.0" prefHeight="30.0" prefWidth="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="75.0" layoutY="70.0" text="Personal Information">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="233.0" text="Date of Birth">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="radioMale" layoutX="142.0" layoutY="308.0" mnemonicParsing="false" text="Male" />
+      <Label layoutX="75.0" layoutY="306.0" text="Gender">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="radioFemale" layoutX="210.0" layoutY="308.0" mnemonicParsing="false" text="Female" />
+      <Label layoutX="359.0" layoutY="101.0" text="Email">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="359.0" layoutY="166.0" text="Mobile">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEmail" layoutX="359.0" layoutY="127.0" prefHeight="30.0" prefWidth="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtMobile" layoutX="359.0" layoutY="193.0" prefHeight="30.0" prefWidth="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="359.0" layoutY="71.0" text="Contact Information">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="359.0" layoutY="232.0" text="Address">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtAddress" layoutX="359.0" layoutY="259.0" prefHeight="30.0" prefWidth="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <DatePicker fx:id="dtDob" layoutX="75.0" layoutY="260.0" prefHeight="30.0" prefWidth="240.0" />
+      <Label layoutX="75.0" layoutY="391.0" text="NIC">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="456.0" text="Student ID">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNic" layoutX="75.0" layoutY="417.0" prefHeight="30.0" prefWidth="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtStdId" layoutX="75.0" layoutY="483.0" prefHeight="30.0" prefWidth="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="75.0" layoutY="358.0" text="Registration Information">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="359.0" layoutY="297.0" text="City">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCity" layoutX="359.0" layoutY="324.0" prefHeight="30.0" prefWidth="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="359.0" layoutY="363.0" text="Province">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtProvince" layoutX="359.0" layoutY="390.0" prefHeight="30.0" prefWidth="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="641.0" layoutY="101.0" text="Faculty">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="641.0" layoutY="166.0" text="Batch">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="641.0" layoutY="71.0" text="Student Information">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboFaculty" layoutX="641.0" layoutY="127.0" prefHeight="30.0" prefWidth="200.0" />
+      <ComboBox fx:id="comboBatch" layoutX="641.0" layoutY="193.0" prefHeight="30.0" prefWidth="200.0" />
+      <Label layoutX="641.0" layoutY="232.0" text="Degree">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboDegree" layoutX="641.0" layoutY="259.0" prefHeight="30.0" prefWidth="200.0" />
+      <Button fx:id="btnSave" layoutX="735.0" layoutY="483.0" mnemonicParsing="false" onAction="#saveChanges" text="Save Changes">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCancel" layoutX="663.0" layoutY="483.0" mnemonicParsing="false" onAction="#cancelChanges" text="Cancel">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
