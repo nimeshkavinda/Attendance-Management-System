@@ -39,7 +39,6 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
-import static jdk.nashorn.internal.objects.NativeRegExp.source;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -263,12 +262,10 @@ public class ManageAccountController implements Initializable {
     private void UpdateDp(ActionEvent event) throws MalformedURLException {
 
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+        fileChooser.getExtensionFilters().addAll(extFilterPNG);
 
-        File file = new File(empid);
-        file = fileChooser.showOpenDialog(null);
+        File file = fileChooser.showOpenDialog(null);
         String path = file.getAbsolutePath();
 
         try {

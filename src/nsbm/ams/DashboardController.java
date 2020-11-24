@@ -5,6 +5,7 @@
  */
 package nsbm.ams;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -64,13 +65,7 @@ public class DashboardController implements Initializable {
     int timeOfDay;
     String empemail;
     String empid;
-    String path;
-    String imgpath;
     String flname;
-    String doc = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
-    String dir = "\\NSBMAMS\\";
-    Path loc = null;
-    Path imgDp = null;
 
     /**
      * Initializes the controller class.
@@ -103,7 +98,7 @@ public class DashboardController implements Initializable {
             } else {
                 lblGreeting.setText("Hello There");
             }
-            
+
             if (timeOfDay >= 0 && timeOfDay < 12) {
                 lblNameAlt1.setText(flname);
             } else if (timeOfDay >= 12 && timeOfDay < 16) {
@@ -114,26 +109,16 @@ public class DashboardController implements Initializable {
                 lblNameAlt.setText(flname);
             }
 
-            path = doc + dir;
-            imgpath = doc + dir + empemail + ".png";
-            loc = Paths.get(path);
-            imgDp = Paths.get(imgpath);
+            String doc = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
+            Path imgloc = Paths.get(doc + "/" + empid + ".png");
+            String imgpath = imgloc.toString();
 
-            if (Files.notExists(loc)) {
-                try {
-                    Files.createDirectory(loc);
-
-                } catch (IOException ex) {
-                    Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            if (Files.notExists(imgloc)) {
+                Image dp = new Image("resources/img/dp.png");
+                picProfile.setFill(new ImagePattern(dp));
             } else {
-                if (Files.notExists(imgDp)) {
-                    Image defaultdp = new Image("resources/img/dp.png");
-                    picProfile.setFill(new ImagePattern(defaultdp));
-                } else {
-                    Image dp = new Image("resources/img/dp.png");
-                    picProfile.setFill(new ImagePattern(dp));
-                }
+                Image dp = new Image("resources/img/13.png");
+                picProfile.setFill(new ImagePattern(dp));
             }
 
         });
