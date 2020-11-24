@@ -266,13 +266,15 @@ public class ManageAccountController implements Initializable {
         fileChooser.getExtensionFilters().addAll(extFilterPNG);
 
         File file = fileChooser.showOpenDialog(null);
+        String imgname = file.getName();
+//        file.renameTo(file)
         String path = file.getAbsolutePath();
 
         try {
             File destDir = new File(new JFileChooser().getFileSystemView().getDefaultDirectory().toString());
             File srcFile = new File(path);
             FileUtils.copyFileToDirectory(srcFile, destDir);
-            InputStream inputStream = new FileInputStream(destDir);
+            InputStream inputStream = new FileInputStream(destDir+"/"+imgname);
             Image image = new Image(inputStream);
             imgDp.setFill(new ImagePattern(image));
 
