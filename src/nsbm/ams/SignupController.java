@@ -66,7 +66,6 @@ public class SignupController implements Initializable {
 
     String selection;
     int selectedIndex;
-    DatabaseConnection con;
 
     /**
      * Initializes the controller class.
@@ -78,7 +77,6 @@ public class SignupController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         comboAccType.setItems(list);
-        con = new DatabaseConnection();
 
     }
 
@@ -173,14 +171,14 @@ public class SignupController implements Initializable {
 
             } else {
 
-                Connection conn = DatabaseConnection.ConnectDatabase();
+                Connection con = DatabaseConnection.ConnectDatabase();
 
-                if (conn != null) {
+                if (con != null) {
 
                     try {
 
                         PreparedStatement ps;
-                        ps = (PreparedStatement) conn.prepareStatement("insert into employee (fname, lname, email, mobile, password, access_lvl) values (?,?,?,?,?," + selectedIndex + ")");
+                        ps = (PreparedStatement) con.prepareStatement("insert into employee (fname, lname, email, mobile, password, access_lvl) values (?,?,?,?,?," + selectedIndex + ")");
 
                         ps.setString(1, fname);
                         ps.setString(2, lname);
