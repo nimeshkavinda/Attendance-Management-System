@@ -6,7 +6,10 @@
 package nsbm.ams;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -117,8 +120,14 @@ public class DashboardController implements Initializable {
                 Image dp = new Image("resources/img/dp.png");
                 picProfile.setFill(new ImagePattern(dp));
             } else {
-                Image dp = new Image("resources/img/13.png");
-                picProfile.setFill(new ImagePattern(dp));
+                InputStream inputStream = null;
+                try {
+                    inputStream = new FileInputStream(doc+"/"+empid+".png");
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Image image = new Image(inputStream);
+                picProfile.setFill(new ImagePattern(image));
             }
 
         });
