@@ -26,10 +26,9 @@ public class Scan extends javax.swing.JFrame {
     /**
      * Creates new form Scan
      */
-    
     @FXML
     private Pane paneMain;
-    
+
     String useremail;
     String studentid;
     String fname;
@@ -44,7 +43,7 @@ public class Scan extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
-    
+
     public Scan(String email) {
         initComponents();
         useremail = email;
@@ -364,12 +363,12 @@ public class Scan extends javax.swing.JFrame {
 
     private void txtIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
             studentid = txtID.getText();
-            
-            if(!studentid.matches("^[0-9]*$")){
-                
+
+            if (!studentid.matches("^[0-9]*$")) {
+
                 lblStatus.setText("ID must contain integers between 0-9");
                 txtID.setText("");
                 lblName.setText("");
@@ -379,12 +378,11 @@ public class Scan extends javax.swing.JFrame {
                 lblBatch.setText("");
                 lblFaculty.setText("");
                 lblDegree.setText("");
-                
-            }
-            else{
-                
-                if(studentid.length() != 10){
-                    
+
+            } else {
+
+                if (studentid.length() != 10) {
+
                     lblStatus.setText("ID must contain 10 characters");
                     txtID.setText("");
                     lblName.setText("");
@@ -394,21 +392,20 @@ public class Scan extends javax.swing.JFrame {
                     lblBatch.setText("");
                     lblFaculty.setText("");
                     lblDegree.setText("");
-                    
-                }
-                else{
-                    
+
+                } else {
+
                     con = DatabaseConnection.ConnectDatabase();
-                
+
                     String qry = "select fname, lname, email, nic, batch, faculty, degree from student where stdid = ?";
 
-                    try{
+                    try {
                         ps = con.prepareStatement(qry);
                         ps.setString(1, studentid);
                         rs = ps.executeQuery();
 
-                        if (rs.next()){
-                            
+                        if (rs.next()) {
+
                             fname = rs.getString("fname");
                             lname = rs.getString("lname");
                             stdemail = rs.getString("email");
@@ -416,7 +413,7 @@ public class Scan extends javax.swing.JFrame {
                             batch = rs.getString("batch");
                             faculty = rs.getString("faculty");
                             degree = rs.getString("degree");
-                            
+
                             lblStatus.setText("Student");
                             lblName.setText(fname + " " + lname);
                             lblStdID.setText(studentid);
@@ -425,21 +422,18 @@ public class Scan extends javax.swing.JFrame {
                             lblBatch.setText(batch);
                             lblFaculty.setText(faculty);
                             lblDegree.setText(degree);
-                            
-                            
+
                             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                             Date date = new Date();
                             datetime = dateFormat.format(date);
-                            
+
                             Calendar c = Calendar.getInstance();
                             c.setTime(date);
                             day = c.get(Calendar.DAY_OF_WEEK);
-                            
-                            MarkAttendance markatd = new MarkAttendance(studentid, datetime, day);
-                            
 
-                        }
-                        else{
+                            MarkAttendance markatd = new MarkAttendance(studentid, datetime, day);
+
+                        } else {
 
                             lblStatus.setText("Invalid");
                             txtID.setText("");
@@ -450,28 +444,24 @@ public class Scan extends javax.swing.JFrame {
                             lblBatch.setText("");
                             lblFaculty.setText("");
                             lblDegree.setText("");
-                            
+
                         }
-                    }
-                    catch (SQLException ex)
-                    {
+                    } catch (SQLException ex) {
                         ex.printStackTrace();
-                    }
-                    finally
-                    {
+                    } finally {
                         txtID.setText("");
                     }
                 }
-                
+
             }
-            
+
         }
     }//GEN-LAST:event_txtIDKeyPressed
 
     private void btnSignoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignoutActionPerformed
         // TODO add your handling code here:
-        this.dispose();      
-          
+        this.dispose();
+
     }//GEN-LAST:event_btnSignoutActionPerformed
 
     /**

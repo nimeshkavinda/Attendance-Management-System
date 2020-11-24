@@ -6,9 +6,13 @@
 package nsbm.ams;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +20,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,10 +34,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.swing.JFileChooser;
+import org.apache.commons.io.FileUtils;
 
 /**
  * FXML Controller class
@@ -65,7 +74,7 @@ public class ManageAccountController implements Initializable {
     private PasswordField txtConPass;
     @FXML
     private Circle imgDp;
-    
+
     String oldFName;
     String oldLName;
     String oldEmail;
@@ -73,64 +82,71 @@ public class ManageAccountController implements Initializable {
     PreparedStatement pstmt = null;
     Connection con = null;
     ResultSet rs = null;
-    String email = "test@nsbm.lk";
+    String email;
+    String empid;
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        con = DatabaseConnection.ConnectDatabase();
-        
-        String populateFields = "select * from employee where email = '"+email+"'";
-        
-        try{
-            
-            pstmt = con.prepareStatement(populateFields);
-            rs = pstmt.executeQuery();
-            
-            if(rs.next()){
-                
-                oldFName = rs.getString("fname");
-                oldLName = rs.getString("lname");
-                oldEmail = rs.getString("email");
-                oldMobile = rs.getString("mobile");
+        Platform.runLater(() -> {
 
-                txtFName.setText(oldFName);
-                txtLName.setText(oldLName);
-                txtEmail.setText(oldEmail);
-                txtMobile.setText(oldMobile);
-                
-            }
-            else{
-                
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Fetching error");
-                alert.setContentText("Couldn't fetch the existing data");
+            con = DatabaseConnection.ConnectDatabase();
 
-                alert.showAndWait();
-                
-            }
-            
-        }
-        catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        finally{
+            String populateFields = "select * from employee where email = '" + email + "'";
+
             try {
-                con.close();
+
+                pstmt = con.prepareStatement(populateFields);
+                rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+
+                    oldFName = rs.getString("fname");
+                    oldLName = rs.getString("lname");
+                    oldEmail = rs.getString("email");
+                    oldMobile = rs.getString("mobile");
+
+                    txtFName.setText(oldFName);
+                    txtLName.setText(oldLName);
+                    txtEmail.setText(oldEmail);
+                    txtMobile.setText(oldMobile);
+
+                } else {
+
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Fetching error");
+                    alert.setContentText("Couldn't fetch the existing data");
+
+                    alert.showAndWait();
+
+                }
+
             } catch (SQLException ex) {
-                Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
+            } finally {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        }
+
+        });
     }
 
-    public void setEmail(String empEmail){
+    public void setEmail(String empEmail) {
         email = empEmail;
+    }
+
+    public void setEmpId(String empId) {
+        empid = empId;
     }
 
     @FXML
@@ -141,81 +157,76 @@ public class ManageAccountController implements Initializable {
 
     @FXML
     private void saveChanges(ActionEvent event) throws SQLException {
-        
+
         String newFName = txtFName.getText();
         String newLName = txtLName.getText();
         String newEmail = txtEmail.getText();
         String mobile = txtMobile.getText();
         String newPass = txtPass.getText();
-        
+
         con = DatabaseConnection.ConnectDatabase();
-        
-        String qry = "update employee set fname = '"+newFName+"', lname = '"+newLName+"', email = '"+newEmail+"', mobile = '"+mobile+"', password = '"+newPass+"' where email = '"+email+"'";
-        
-        try{
-            
-            if(txtPass.getText() == null || txtPass.getText().isEmpty() || txtConPass.getText() == null || txtConPass.getText().isEmpty()){
-                
+
+        String qry = "update employee set fname = '" + newFName + "', lname = '" + newLName + "', email = '" + newEmail + "', mobile = '" + mobile + "', password = '" + newPass + "' where email = '" + email + "'";
+
+        try {
+
+            if (txtPass.getText() == null || txtPass.getText().isEmpty() || txtConPass.getText() == null || txtConPass.getText().isEmpty()) {
+
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Invalid data");
                 alert.setHeaderText("Something is missing");
                 alert.setContentText("Make sure you have filled the passwords");
 
                 alert.showAndWait();
-                
-            }
-            else if(!txtPass.getText().equals(txtConPass.getText())){
-                
+
+            } else if (!txtPass.getText().equals(txtConPass.getText())) {
+
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Invalid data");
                 alert.setHeaderText("Invalid passwords");
                 alert.setContentText("Make sure the passwords match");
 
                 alert.showAndWait();
-                
-            }
-            else{
-                
+
+            } else {
+
                 pstmt = con.prepareStatement(qry);
                 int result = pstmt.executeUpdate();
 
-                if(result > 0) {
-                    
+                if (result > 0) {
+
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Account update");
                     alert.setHeaderText("Successful");
                     alert.setContentText("Your information has been changed");
 
                     alert.showAndWait();
-                    
-                }
-                else{
-                    
+
+                } else {
+
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Couldn't update");
                     alert.setContentText("Failed to update your changes");
 
                     alert.showAndWait();
-                    
+
                 }
-                
+
             }
-            
-        }
-        catch(SQLException ex){
+
+        } catch (SQLException ex) {
             ex.printStackTrace();
-        }
-        finally{
-            
-            String populateFields = "select * from employee where email = '"+email+"'";
-        
-            try{
+        } finally {
+
+            String populateFields = "select * from employee where email = '" + email + "'";
+
+            try {
 
                 pstmt = con.prepareStatement(populateFields);
                 rs = pstmt.executeQuery();
 
-                if(rs.next()){
+                if (rs.next()) {
 
                     oldFName = rs.getString("fname");
                     oldLName = rs.getString("lname");
@@ -229,8 +240,7 @@ public class ManageAccountController implements Initializable {
                     txtPass.setText("");
                     txtConPass.setText("");
 
-                }
-                else{
+                } else {
 
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
@@ -241,77 +251,89 @@ public class ManageAccountController implements Initializable {
 
                 }
 
-            }
-            catch(SQLException ex){
+            } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            
+
             con.close();
         }
-        
+
     }
 
     @FXML
     private void UpdateDp(ActionEvent event) throws MalformedURLException {
-        FileChooser fileChooser = new FileChooser();
 
-        File file = fileChooser.showOpenDialog(paneManageAcc.getScene().getWindow());
-    if (file != null) {
-        URL url = file.toURI().toURL();
-        
-    }
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        fileChooser.getExtensionFilters().addAll(extFilterPNG);
+
+        File file = fileChooser.showOpenDialog(null);
+        String path = file.getAbsolutePath();
+
+        try {
+            File destDir = new File(new JFileChooser().getFileSystemView().getDefaultDirectory().toString());
+            File srcFile = new File(path);
+            FileUtils.copyFileToDirectory(srcFile, destDir);
+            File newFile = new File(destDir+"/"+srcFile.getName());
+            newFile.renameTo(new File(destDir+"/"+empid+".png"));
+            InputStream inputStream = new FileInputStream(destDir+"/"+empid+".png");
+            Image image = new Image(inputStream);
+            imgDp.setFill(new ImagePattern(image));
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     @FXML
     private void DeleteAcc(ActionEvent event) throws IOException, SQLException {
-        
+
         con = DatabaseConnection.ConnectDatabase();
-        
+
         String qry = "delete from employee where email = ? ";
-        
-        try{
-            
-            pstmt = con.prepareStatement(qry); 
+
+        try {
+
+            pstmt = con.prepareStatement(qry);
             pstmt.setString(1, email);
             int result = pstmt.executeUpdate();
-            
+
             if (result > 0) {
-                
+
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Account update");
                 alert.setHeaderText("Your account has been deleted");
                 alert.setContentText("You'll be taken back to login window");
 
                 alert.showAndWait();
-                
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
                 Parent root = loader.load();
-                Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root,800, 600));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 600));
                 stage.show();
                 stage.centerOnScreen();
                 stage.setTitle("Attendance Management System");
                 stage.setResizable(false);
-                
+
             } else {
-                
+
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Looks like that didn't work");
                 alert.setContentText("Failed to delete your account");
 
                 alert.showAndWait();
-                
+
             }
-            
-        }
-        catch(SQLException ex){
-            ex.printStackTrace();   
-        }
-        finally{
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
             con.close();
         }
-        
+
     }
-    
+
 }
