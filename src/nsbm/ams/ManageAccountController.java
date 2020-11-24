@@ -7,12 +7,16 @@ package nsbm.ams;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,10 +36,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -136,6 +144,23 @@ public class ManageAccountController implements Initializable {
                 } catch (SQLException ex) {
                     Logger.getLogger(ManageAccountController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+
+            String doc = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
+            Path imgloc = Paths.get(doc + "/" + empid + ".png");
+
+            if (Files.notExists(imgloc)) {
+                Image dp = new Image("resources/img/dp.png");
+                imgDp.setFill(new ImagePattern(dp));
+            } else {
+                InputStream inputStream = null;
+                try {
+                    inputStream = new FileInputStream(doc + "/" + empid + ".png");
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Image image = new Image(inputStream);
+                imgDp.setFill(new ImagePattern(image));
             }
 
         });
@@ -261,7 +286,7 @@ public class ManageAccountController implements Initializable {
     }
 
     @FXML
-    private void UpdateDp(ActionEvent event) throws MalformedURLException {
+    private void UpdateDp(ActionEvent event) throws MalformedURLException, FileNotFoundException {
 
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
@@ -274,16 +299,45 @@ public class ManageAccountController implements Initializable {
             File destDir = new File(new JFileChooser().getFileSystemView().getDefaultDirectory().toString());
             File srcFile = new File(path);
             FileUtils.copyFileToDirectory(srcFile, destDir);
-            File newFile = new File(destDir+"/"+srcFile.getName());
-            newFile.renameTo(new File(destDir+"/"+empid+".png"));
-            InputStream inputStream = new FileInputStream(destDir+"/"+empid+".png");
+            File newFile = new File(destDir + "/" + srcFile.getName());
+            newFile.renameTo(new File(destDir + "/" + empid + ".png"));
+            InputStream inputStream = new FileInputStream(destDir + "/" + empid + ".png");
             Image image = new Image(inputStream);
             imgDp.setFill(new ImagePattern(image));
+            DashboardController dashctrl = new DashboardController();
+            dashctrl.refreshDp(empid);
 
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Oops, that did not work");
+            alert.setContentText("Could not update the profile image");
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("The exception stacktrace was:");
+
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0, 1);
+
+            alert.getDialogPane().setExpandableContent(expContent);
+
+            alert.showAndWait();
         }
-
     }
 
     @FXML

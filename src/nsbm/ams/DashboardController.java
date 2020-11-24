@@ -114,7 +114,6 @@ public class DashboardController implements Initializable {
 
             String doc = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
             Path imgloc = Paths.get(doc + "/" + empid + ".png");
-            String imgpath = imgloc.toString();
 
             if (Files.notExists(imgloc)) {
                 Image dp = new Image("resources/img/dp.png");
@@ -122,7 +121,7 @@ public class DashboardController implements Initializable {
             } else {
                 InputStream inputStream = null;
                 try {
-                    inputStream = new FileInputStream(doc+"/"+empid+".png");
+                    inputStream = new FileInputStream(doc + "/" + empid + ".png");
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -143,6 +142,13 @@ public class DashboardController implements Initializable {
 
     public void setEmpId(String id) {
         empid = id;
+    }
+
+    public void refreshDp(String imgname) throws FileNotFoundException {
+        String doc = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
+        InputStream inputStream = new FileInputStream(doc + "/" + imgname + ".png");
+        Image image = new Image(inputStream);
+        picProfile.setFill(new ImagePattern(image));
     }
 
     @FXML
