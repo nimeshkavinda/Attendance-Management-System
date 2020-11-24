@@ -52,6 +52,7 @@ public class AdminLoginController implements Initializable {
     String lname;
     String flname;
     String email;
+    String empid;
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
@@ -115,6 +116,7 @@ public class AdminLoginController implements Initializable {
                     
                     if (rs.next()){
                         
+                        empid = rs.getString("empid");
                         fname = rs.getString("fname");
                         lname = rs.getString("lname");
                         flname = fname + " " + lname;
@@ -122,10 +124,11 @@ public class AdminLoginController implements Initializable {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
                         
                         Parent root = loader.load();
-                        DashboardController dashctrl = loader.getController();
                         Stage dashboard = (Stage)((Node) event.getSource()).getScene().getWindow();
+                        DashboardController dashctrl = loader.getController();
                         dashctrl.setName(flname);
                         dashctrl.setEmail(email);
+                        dashctrl.setEmpId(empid);
                         dashboard.setScene(new Scene(root,1200, 700));
                         dashboard.show();
                         dashboard.centerOnScreen();
