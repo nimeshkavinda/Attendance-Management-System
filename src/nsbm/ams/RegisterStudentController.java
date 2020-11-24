@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -84,6 +85,8 @@ public class RegisterStudentController implements Initializable {
     @FXML
     ToggleGroup group = new ToggleGroup();
 
+    int degreeid;
+
     /**
      * Initializes the controller class.
      */
@@ -121,6 +124,44 @@ public class RegisterStudentController implements Initializable {
     }
 
     @FXML
+    private void getDegreeId(ActionEvent event) {
+
+        String selection = comboDegree.getValue();
+
+        if (selection != null) {
+            switch (selection) {
+                case "Business Management":
+                    degreeid = 1;
+                    break;
+                case "Marketing Management":
+                    degreeid = 2;
+                    break;
+                case "Accounting and Finance":
+                    degreeid = 3;
+                    break;
+                case "Software Engineering":
+                    degreeid = 4;
+                    break;
+                case "Computer Networks":
+                    degreeid = 5;
+                    break;
+                case "Computer Security":
+                    degreeid = 6;
+                    break;
+                case "Computer System Engineering":
+                    degreeid = 7;
+                    break;
+                case "Interior Design":
+                    degreeid = 8;
+                    break;
+                default:
+                    degreeid = 0;
+            }
+        }
+
+    }
+
+    @FXML
     private void toHome(ActionEvent event) throws IOException {
         Pane paneMenu = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         paneStudentReg.getChildren().setAll(paneMenu);
@@ -152,6 +193,91 @@ public class RegisterStudentController implements Initializable {
         String faculty = comboFaculty.getValue();
         String batch = comboBatch.getValue();
         String degree = comboDegree.getValue();
+
+        if (fname.isEmpty() || lname.isEmpty() || dob.isEmpty() || gender.isEmpty() || nic.isEmpty() || studentid.isEmpty() || email.isEmpty() || mobile.isEmpty() || address.isEmpty() || city.isEmpty() || province.isEmpty() || faculty.isEmpty() || batch.isEmpty() || degree.isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Data missing");
+            alert.setHeaderText("Looks like you have missed something");
+            alert.setContentText("Please fill in all the fields");
+
+            alert.showAndWait();
+
+        } else if (!fname.matches("^[a-zA-Z]+$") || !lname.matches("^[a-zA-Z]+$")) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid format");
+            alert.setHeaderText(null);
+            alert.setContentText("Name must contain only letters");
+
+            alert.showAndWait();
+
+        } else if (!email.matches("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$")) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid format");
+            alert.setHeaderText(null);
+            alert.setContentText("Email should be valid");
+
+            alert.showAndWait();
+
+        } else if (!nic.matches("^[0-9]*$")) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid format");
+            alert.setHeaderText(null);
+            alert.setContentText("NIC is not valid");
+
+            alert.showAndWait();
+
+        } else if (!mobile.matches("^[0-9]*$")) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid format");
+            alert.setHeaderText(null);
+            alert.setContentText("Mobile number is not valid");
+
+            alert.showAndWait();
+
+        } else if (!studentid.matches("^\\d{10}$")) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid format");
+            alert.setHeaderText(null);
+            alert.setContentText("Student ID must only contain numbers and the length should be 10");
+
+            alert.showAndWait();
+
+        } else if (!address.matches("^[a-zA-Z]+$") || !city.matches("^[a-zA-Z]+$") || !province.matches("^[a-zA-Z]+$")) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid format");
+            alert.setHeaderText(null);
+            alert.setContentText("Your address is not valid");
+
+            alert.showAndWait();
+
+        } else {
+
+            Student student = new Student();
+            student.setFname(fname);
+            student.setLname(lname);
+            student.setDob(dob);
+            student.setGender(gender);
+            student.setNic(nic);
+            student.setStudentid(studentid);
+            student.setEmail(email);
+            student.setMobile(mobile);
+            student.setAddress(address);
+            student.setCity(city);
+            student.setProvince(province);
+            student.setFaculty(faculty);
+            student.setBatch(batch);
+            student.setDegree(degree);
+            student.setDegreeid(degreeid);
+            student.registerStudent();
+
+        }
 
     }
 

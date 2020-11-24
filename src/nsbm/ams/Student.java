@@ -37,6 +37,7 @@ public class Student implements StudentServices {
     private String faculty;
     private String batch;
     private String degree;
+    private int degreeid;
 
     public void setFname(String fname) {
         this.fname = fname;
@@ -92,6 +93,10 @@ public class Student implements StudentServices {
 
     public void setDegree(String degree) {
         this.degree = degree;
+    }
+
+    public void setDegreeid(int degreeid) {
+        this.degreeid = degreeid;
     }
 
     public String getFname() {
@@ -150,10 +155,14 @@ public class Student implements StudentServices {
         return degree;
     }
 
+    public int getDegreeid() {
+        return degreeid;
+    }
+
     @Override
     public void registerStudent() {
 
-        if (fname.isEmpty() || lname.isEmpty() || dob.isEmpty() || gender.isEmpty() || nic.isEmpty() || studentid.isEmpty() || email.isEmpty() || mobile.isEmpty() || address.isEmpty() || city.isEmpty() || province.isEmpty() || faculty.isEmpty() || batch.isEmpty() || degree.isEmpty()) {
+        if (fname.isEmpty() || lname.isEmpty() || dob.isEmpty() || gender.isEmpty() || nic.isEmpty() || studentid.isEmpty() || email.isEmpty() || mobile.isEmpty() || address.isEmpty() || city.isEmpty() || province.isEmpty() || faculty.isEmpty() || batch.isEmpty() || degreeid == 0) {
 
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Data missing");
@@ -171,7 +180,7 @@ public class Student implements StudentServices {
                 try {
 
                     PreparedStatement ps;
-                    ps = (PreparedStatement) con.prepareStatement("insert into student (fname, lname, dob, gender, nic, studentid, email, mobile, address, city, province, faculty, batch, degree values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    ps = (PreparedStatement) con.prepareStatement("insert into student (fname, lname, dob, gender, nic, studentid, email, mobile, address, city, province, faculty, batch, degree values (?,?,?,?,?,?,?,?,?,?,?,?,?,'"+degreeid+"')");
 
                     ps.setString(1, fname);
                     ps.setString(2, lname);
@@ -186,7 +195,6 @@ public class Student implements StudentServices {
                     ps.setString(11, province);
                     ps.setString(12, faculty);
                     ps.setString(13, batch);
-                    ps.setString(14, degree);
 
                     int res = ps.executeUpdate();
 
@@ -197,6 +205,8 @@ public class Student implements StudentServices {
                         alert.setContentText("Student has been registered in the AMS");
 
                         alert.showAndWait();
+
+                        
                     } else {
                         Alert alert = new Alert(AlertType.ERROR);
                         alert.setTitle("Error");
