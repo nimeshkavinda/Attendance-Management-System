@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -266,15 +268,15 @@ public class ManageAccountController implements Initializable {
         fileChooser.getExtensionFilters().addAll(extFilterPNG);
 
         File file = fileChooser.showOpenDialog(null);
-        String imgname = file.getName();
-//        file.renameTo(file)
         String path = file.getAbsolutePath();
 
         try {
             File destDir = new File(new JFileChooser().getFileSystemView().getDefaultDirectory().toString());
             File srcFile = new File(path);
             FileUtils.copyFileToDirectory(srcFile, destDir);
-            InputStream inputStream = new FileInputStream(destDir+"/"+imgname);
+            File newFile = new File(destDir+"/"+srcFile.getName());
+            newFile.renameTo(new File(destDir+"/"+empid+".png"));
+            InputStream inputStream = new FileInputStream(destDir+"/"+empid+".png");
             Image image = new Image(inputStream);
             imgDp.setFill(new ImagePattern(image));
 
