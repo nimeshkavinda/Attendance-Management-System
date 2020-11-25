@@ -173,7 +173,7 @@
                 <Font size="14.0" />
             </font>
         </Button>
-        <Button fx:id="btnCancel" layoutX="663.0" layoutY="483.0" mnemonicParsing="false" onAction="#cancelChanges" text="Cancel">
+        <Button fx:id="btnClear" layoutX="675.0" layoutY="483.0" mnemonicParsing="false" onAction="#clearFields" text="Clear">
             <font>
                 <Font size="14.0" />
             </font>

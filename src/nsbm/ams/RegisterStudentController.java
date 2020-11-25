@@ -78,12 +78,13 @@ public class RegisterStudentController implements Initializable {
     @FXML
     private Button btnSave;
     @FXML
-    private Button btnCancel;
-    @FXML
     private Pane paneStudentReg;
 
     @FXML
     ToggleGroup group = new ToggleGroup();
+
+    @FXML
+    private Button btnClear;
 
     int degreeid;
 
@@ -282,7 +283,30 @@ public class RegisterStudentController implements Initializable {
     }
 
     @FXML
-    private void cancelChanges(ActionEvent event) {
+    private void clearFields(ActionEvent event) {
+        
+        txtFName.setText("");
+        txtLName.setText("");
+        txtNic.setText("");
+        txtStdId.setText("");
+        txtEmail.setText("");
+        txtMobile.setText("");
+        txtAddress.setText("");
+        txtCity.setText("");
+        txtProvince.setText("");
+        dtDob.setValue(null);
+        
+        if(radioMale.isSelected()){
+            radioMale.setSelected(false);
+        }
+        if(radioFemale.isSelected()){
+            radioFemale.setSelected(false);
+        }
+        
+        comboFaculty.valueProperty().set(null);
+        comboBatch.valueProperty().set(null);
+        comboDegree.valueProperty().set(null);
+        
     }
 
 }

@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/AdminLoginController.java</file>
             <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/Scan.java</file>
             <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/ManageAccountController.java</file>
             <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/DashboardController.java</file>
             <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/MarkAttendance.java</file>
-            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/style.css</file>
-            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/MenuController.java</file>
+            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/RegisterStudentController.java</file>
+            <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/Student.java</file>
             <file>file:/D:/Documents/GitHub/Attendance-Management-System/src/nsbm/ams/SignupController.java</file>
         </group>
     </open-files>

@@ -180,14 +180,14 @@ public class Student implements StudentServices {
                 try {
 
                     PreparedStatement ps;
-                    ps = (PreparedStatement) con.prepareStatement("insert into student (fname, lname, dob, gender, nic, studentid, email, mobile, address, city, province, faculty, batch, degree values (?,?,?,?,?,?,?,?,?,?,?,?,?,'"+degreeid+"')");
-
-                    ps.setString(1, fname);
-                    ps.setString(2, lname);
-                    ps.setString(3, dob);
-                    ps.setString(4, gender);
-                    ps.setString(5, nic);
-                    ps.setString(6, studentid);
+                    ps = (PreparedStatement) con.prepareStatement("insert into student values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    
+                    ps.setString(1, studentid);
+                    ps.setString(2, fname);
+                    ps.setString(3, lname);
+                    ps.setString(4, dob);
+                    ps.setString(5, gender);
+                    ps.setString(6, nic);
                     ps.setString(7, email);
                     ps.setString(8, mobile);
                     ps.setString(9, address);
@@ -195,6 +195,7 @@ public class Student implements StudentServices {
                     ps.setString(11, province);
                     ps.setString(12, faculty);
                     ps.setString(13, batch);
+                    ps.setInt(14, degreeid);
 
                     int res = ps.executeUpdate();
 

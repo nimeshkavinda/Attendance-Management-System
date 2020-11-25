@@ -44,6 +44,7 @@ public class Scan extends javax.swing.JFrame {
     String nic;
     String faculty;
     String batch;
+    int degreeid;
     String degree;
     String datetime;
     int day;
@@ -404,7 +405,7 @@ public class Scan extends javax.swing.JFrame {
 
                     con = DatabaseConnection.ConnectDatabase();
 
-                    String qry = "select fname, lname, email, nic, batch, faculty, degree from student where stdid = ?";
+                    String qry = "select * from student where stdid = ?";
 
                     try {
                         ps = con.prepareStatement(qry);
@@ -419,7 +420,38 @@ public class Scan extends javax.swing.JFrame {
                             nic = rs.getString("nic");
                             batch = rs.getString("batch");
                             faculty = rs.getString("faculty");
-                            degree = rs.getString("degree");
+                            degreeid = rs.getInt("did");
+
+                            if (degreeid != 0) {
+                                switch (degreeid) {
+                                    case 1:
+                                        degree = "Business Management";
+                                        break;
+                                    case 2:
+                                        degree = "Marketing Management";
+                                        break;
+                                    case 3:
+                                        degree = "Accounting and Finance";
+                                        break;
+                                    case 4:
+                                        degree = "Software Engineering";
+                                        break;
+                                    case 5:
+                                        degree = "Computer Networks";
+                                        break;
+                                    case 6:
+                                        degree = "Computer Security";
+                                        break;
+                                    case 7:
+                                        degree = "Computer System Engineering";
+                                        break;
+                                    case 8:
+                                        degree = "Interior Design";
+                                        break;
+                                    default:
+                                        degree = "";
+                                }
+                            }
 
                             lblStatus.setText("Student");
                             lblName.setText(fname + " " + lname);
