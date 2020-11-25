@@ -249,7 +249,7 @@ public class RegisterStudentController implements Initializable {
 
             alert.showAndWait();
 
-        } else if (!address.matches("^[a-zA-Z]+$") || !city.matches("^[a-zA-Z]+$") || !province.matches("^[a-zA-Z]+$")) {
+        } else if (!city.matches("^[a-zA-Z]+$") || !province.matches("^[a-zA-Z]+$")) {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Invalid format");

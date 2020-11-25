@@ -40,6 +40,10 @@ public class Student implements StudentServices {
     private String degree;
     private int degreeid;
     private String day;
+    private String moduleid;
+    private String moduleday;
+    private String time;
+    private String fullname;
 
     public void setFname(String fname) {
         this.fname = fname;
@@ -169,6 +173,10 @@ public class Student implements StudentServices {
         return day;
     }
 
+    public String getFullname() {
+        return fullname;
+    }
+
     @Override
     public void registerStudent() {
 
@@ -190,7 +198,7 @@ public class Student implements StudentServices {
                 try {
 
                     PreparedStatement ps;
-                    ps = (PreparedStatement) con.prepareStatement("insert into student values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    ps = (PreparedStatement) con.prepareStatement("INSERT INTO student VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
                     ps.setString(1, studentid);
                     ps.setString(2, fname);
@@ -274,6 +282,41 @@ public class Student implements StudentServices {
         }
 
     }
+    
+    @Override
+    public void setContactInfo(String stdid){
+        
+        Connection con = DatabaseConnection.ConnectDatabase();
+        String qry = "SELECT * FROM student WHERE stdid = '" + stdid + "'";
+        
+        if (con != null) {
+
+            try {
+
+                PreparedStatement ps;
+                ResultSet rs;
+                ps = con.prepareStatement(qry);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+
+                    fname = rs.getString("fname");
+                    lname = rs.getString("lname");
+                    email = rs.getString("email");
+                    
+                    fullname = fname + " " +lname;
+
+                }
+
+            } catch (SQLException ex) {
+
+                ex.printStackTrace();
+
+            }
+
+        }
+        
+    }
 
     @Override
     public void generateTimeTable() {
@@ -292,53 +335,27 @@ public class Student implements StudentServices {
 
                 if (rs.next()) {
 
+                    moduleid = rs.getString("mid");
+                    moduleday = rs.getString("day");
+                    time = rs.getString("time");
+
                 }
 
             } catch (SQLException ex) {
 
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Oops, that did not work");
-                alert.setContentText("Failed to get the timetable");
-
-                StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);
-                ex.printStackTrace(pw);
-                String exceptionText = sw.toString();
-
-                Label label = new Label("The exception stacktrace was:");
-
-                TextArea textArea = new TextArea(exceptionText);
-                textArea.setEditable(false);
-                textArea.setWrapText(true);
-
-                textArea.setMaxWidth(Double.MAX_VALUE);
-                textArea.setMaxHeight(Double.MAX_VALUE);
-                GridPane.setVgrow(textArea, Priority.ALWAYS);
-                GridPane.setHgrow(textArea, Priority.ALWAYS);
-
-                GridPane expContent = new GridPane();
-                expContent.setMaxWidth(Double.MAX_VALUE);
-                expContent.add(label, 0, 0);
-                expContent.add(textArea, 0, 1);
-
-                alert.getDialogPane().setExpandableContent(expContent);
-
-                alert.showAndWait();
+                ex.printStackTrace();
 
             }
 
-        } else {
-
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Connection error");
-            alert.setHeaderText("Ah oh!");
-            alert.setContentText("Looks like the database connection is not available");
-
-            alert.showAndWait();
-
         }
 
+    }
+    
+    public void sendEmail(){
+        
+        Email email = new Email(moduleid, time);
+        email.sendEmail();
+        
     }
 
 }

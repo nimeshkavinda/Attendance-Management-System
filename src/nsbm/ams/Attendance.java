@@ -21,7 +21,7 @@ import javafx.scene.layout.Priority;
  *
  * @author Nimesh
  */
-public class MarkAttendance {
+public class Attendance {
 
     String studentid;
     String date;
@@ -30,11 +30,15 @@ public class MarkAttendance {
     ResultSet rs = null;
     PreparedStatement ps = null;
 
-    public MarkAttendance(String stdid, String atddate, String day) {
+    public Attendance(String stdid, String atddate, String day) {
 
         studentid = stdid;
         date = atddate;
         today = day;
+
+    }
+
+    public void markAttendance() {
 
         con = DatabaseConnection.ConnectDatabase();
 
@@ -43,7 +47,7 @@ public class MarkAttendance {
             try {
 
                 PreparedStatement pstmt;
-                pstmt = (PreparedStatement) con.prepareStatement("insert into attendance (stdid, date, day) values (?,?,?)");
+                pstmt = (PreparedStatement) con.prepareStatement("INSERT INTO attendance (stdid, date, day) VALUES (?,?,?)");
 
                 pstmt.setString(1, studentid);
                 pstmt.setString(2, date);

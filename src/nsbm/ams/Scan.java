@@ -495,12 +495,15 @@ public class Scan extends javax.swing.JFrame {
                                     break;
                             }
 
-                            MarkAttendance markatd = new MarkAttendance(studentid, datetime, today);
+                            Attendance atd = new Attendance(studentid, datetime, today);
+                            atd.markAttendance();
 
                             Student student = new Student();
                             student.setStudentid(studentid);
                             student.setDay(today);
+                            student.setContactInfo(studentid);
                             student.generateTimeTable();
+                            student.sendEmail();
 
                         } else {
 
