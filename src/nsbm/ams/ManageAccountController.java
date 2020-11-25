@@ -303,7 +303,7 @@ public class ManageAccountController implements Initializable {
             alert.showAndWait();
         } finally {
 
-            String populateFields = "select * from employee where email = '" + email + "'";
+            String populateFields = "SELECT * FROM employee WHERE email = '" + email + "'";
 
             try {
 
@@ -446,7 +446,7 @@ public class ManageAccountController implements Initializable {
 
         con = DatabaseConnection.ConnectDatabase();
 
-        String qry = "delete from employee where email = ? ";
+        String qry = "DELETE FROM employee WHERE email = ? ";
 
         try {
 

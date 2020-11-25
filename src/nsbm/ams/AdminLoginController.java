@@ -110,7 +110,7 @@ public class AdminLoginController implements Initializable {
 
                 con = DatabaseConnection.ConnectDatabase();
 
-                String qry = "select * from employee where email = ? and password = ? and access_lvl = '0' ";
+                String qry = "SELECT * FROM employee WHERE email = ? AND password = ? AND access_lvl = '0' ";
 
                 try {
                     ps = con.prepareStatement(qry);

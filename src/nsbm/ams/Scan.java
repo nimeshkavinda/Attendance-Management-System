@@ -44,9 +44,11 @@ public class Scan extends javax.swing.JFrame {
     String nic;
     String faculty;
     String batch;
+    int degreeid;
     String degree;
     String datetime;
     int day;
+    String today;
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
@@ -404,7 +406,7 @@ public class Scan extends javax.swing.JFrame {
 
                     con = DatabaseConnection.ConnectDatabase();
 
-                    String qry = "select fname, lname, email, nic, batch, faculty, degree from student where stdid = ?";
+                    String qry = "select * from student where stdid = ?";
 
                     try {
                         ps = con.prepareStatement(qry);
@@ -419,7 +421,38 @@ public class Scan extends javax.swing.JFrame {
                             nic = rs.getString("nic");
                             batch = rs.getString("batch");
                             faculty = rs.getString("faculty");
-                            degree = rs.getString("degree");
+                            degreeid = rs.getInt("did");
+
+                            if (degreeid != 0) {
+                                switch (degreeid) {
+                                    case 1:
+                                        degree = "Business Management";
+                                        break;
+                                    case 2:
+                                        degree = "Marketing Management";
+                                        break;
+                                    case 3:
+                                        degree = "Accounting and Finance";
+                                        break;
+                                    case 4:
+                                        degree = "Software Engineering";
+                                        break;
+                                    case 5:
+                                        degree = "Computer Networks";
+                                        break;
+                                    case 6:
+                                        degree = "Computer Security";
+                                        break;
+                                    case 7:
+                                        degree = "Computer System Engineering";
+                                        break;
+                                    case 8:
+                                        degree = "Interior Design";
+                                        break;
+                                    default:
+                                        degree = "";
+                                }
+                            }
 
                             lblStatus.setText("Student");
                             lblName.setText(fname + " " + lname);
@@ -438,7 +471,39 @@ public class Scan extends javax.swing.JFrame {
                             c.setTime(date);
                             day = c.get(Calendar.DAY_OF_WEEK);
 
-                            MarkAttendance markatd = new MarkAttendance(studentid, datetime, day);
+                            switch (day) {
+                                case 1:
+                                    today = "Sun";
+                                    break;
+                                case 2:
+                                    today = "Mon";
+                                    break;
+                                case 3:
+                                    today = "Tue";
+                                    break;
+                                case 4:
+                                    today = "Wed";
+                                    break;
+                                case 5:
+                                    today = "Thu";
+                                    break;
+                                case 6:
+                                    today = "Fri";
+                                    break;
+                                case 7:
+                                    today = "Sat";
+                                    break;
+                            }
+
+                            Attendance atd = new Attendance(studentid, datetime, today);
+                            atd.markAttendance();
+
+                            Student student = new Student();
+                            student.setStudentid(studentid);
+                            student.setDay(today);
+                            student.setContactInfo(studentid);
+                            student.generateTimeTable();
+                            student.sendEmail();
 
                         } else {
 

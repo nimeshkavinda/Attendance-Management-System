@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -37,6 +38,12 @@ public class Student implements StudentServices {
     private String faculty;
     private String batch;
     private String degree;
+    private int degreeid;
+    private String day;
+    private String moduleid;
+    private String moduleday;
+    private String time;
+    private String fullname;
 
     public void setFname(String fname) {
         this.fname = fname;
@@ -92,6 +99,14 @@ public class Student implements StudentServices {
 
     public void setDegree(String degree) {
         this.degree = degree;
+    }
+
+    public void setDegreeid(int degreeid) {
+        this.degreeid = degreeid;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public String getFname() {
@@ -150,10 +165,22 @@ public class Student implements StudentServices {
         return degree;
     }
 
+    public int getDegreeid() {
+        return degreeid;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
     @Override
     public void registerStudent() {
 
-        if (fname.isEmpty() || lname.isEmpty() || dob.isEmpty() || gender.isEmpty() || nic.isEmpty() || studentid.isEmpty() || email.isEmpty() || mobile.isEmpty() || address.isEmpty() || city.isEmpty() || province.isEmpty() || faculty.isEmpty() || batch.isEmpty() || degree.isEmpty()) {
+        if (fname.isEmpty() || lname.isEmpty() || dob.isEmpty() || gender.isEmpty() || nic.isEmpty() || studentid.isEmpty() || email.isEmpty() || mobile.isEmpty() || address.isEmpty() || city.isEmpty() || province.isEmpty() || faculty.isEmpty() || batch.isEmpty() || degreeid == 0) {
 
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Data missing");
@@ -171,14 +198,14 @@ public class Student implements StudentServices {
                 try {
 
                     PreparedStatement ps;
-                    ps = (PreparedStatement) con.prepareStatement("insert into student (fname, lname, dob, gender, nic, studentid, email, mobile, address, city, province, faculty, batch, degree values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    ps = (PreparedStatement) con.prepareStatement("INSERT INTO student VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-                    ps.setString(1, fname);
-                    ps.setString(2, lname);
-                    ps.setString(3, dob);
-                    ps.setString(4, gender);
-                    ps.setString(5, nic);
-                    ps.setString(6, studentid);
+                    ps.setString(1, studentid);
+                    ps.setString(2, fname);
+                    ps.setString(3, lname);
+                    ps.setString(4, dob);
+                    ps.setString(5, gender);
+                    ps.setString(6, nic);
                     ps.setString(7, email);
                     ps.setString(8, mobile);
                     ps.setString(9, address);
@@ -186,7 +213,7 @@ public class Student implements StudentServices {
                     ps.setString(11, province);
                     ps.setString(12, faculty);
                     ps.setString(13, batch);
-                    ps.setString(14, degree);
+                    ps.setInt(14, degreeid);
 
                     int res = ps.executeUpdate();
 
@@ -197,6 +224,7 @@ public class Student implements StudentServices {
                         alert.setContentText("Student has been registered in the AMS");
 
                         alert.showAndWait();
+
                     } else {
                         Alert alert = new Alert(AlertType.ERROR);
                         alert.setTitle("Error");
@@ -253,6 +281,81 @@ public class Student implements StudentServices {
 
         }
 
+    }
+    
+    @Override
+    public void setContactInfo(String stdid){
+        
+        Connection con = DatabaseConnection.ConnectDatabase();
+        String qry = "SELECT * FROM student WHERE stdid = '" + stdid + "'";
+        
+        if (con != null) {
+
+            try {
+
+                PreparedStatement ps;
+                ResultSet rs;
+                ps = con.prepareStatement(qry);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+
+                    fname = rs.getString("fname");
+                    lname = rs.getString("lname");
+                    email = rs.getString("email");
+                    
+                    fullname = fname + " " +lname;
+
+                }
+
+            } catch (SQLException ex) {
+
+                ex.printStackTrace();
+
+            }
+
+        }
+        
+    }
+
+    @Override
+    public void generateTimeTable() {
+
+        Connection con = DatabaseConnection.ConnectDatabase();
+        String qry = "SELECT * FROM time_table INNER JOIN degree_module ON time_table.mid = degree_module.mid INNER JOIN student ON degree_module.did = student.did WHERE student.stdid = '" + studentid + "' AND time_table.day = '" + day + "'";
+
+        if (con != null) {
+
+            try {
+
+                PreparedStatement ps;
+                ResultSet rs;
+                ps = con.prepareStatement(qry);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+
+                    moduleid = rs.getString("mid");
+                    moduleday = rs.getString("day");
+                    time = rs.getString("time");
+
+                }
+
+            } catch (SQLException ex) {
+
+                ex.printStackTrace();
+
+            }
+
+        }
+
+    }
+    
+    public void sendEmail(){
+        
+        Email email = new Email(moduleid, time);
+        email.sendEmail();
+        
     }
 
 }

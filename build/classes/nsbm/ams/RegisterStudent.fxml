@@ -167,13 +167,13 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <ComboBox fx:id="comboDegree" layoutX="641.0" layoutY="259.0" prefHeight="30.0" prefWidth="200.0" promptText="Select Degree" />
+        <ComboBox fx:id="comboDegree" layoutX="641.0" layoutY="259.0" onAction="#getDegreeId" prefHeight="30.0" prefWidth="200.0" promptText="Select Degree" />
         <Button fx:id="btnSave" layoutX="735.0" layoutY="483.0" mnemonicParsing="false" onAction="#saveChanges" text="Save Changes">
             <font>
                 <Font size="14.0" />
             </font>
         </Button>
-        <Button fx:id="btnCancel" layoutX="663.0" layoutY="483.0" mnemonicParsing="false" onAction="#cancelChanges" text="Cancel">
+        <Button fx:id="btnClear" layoutX="675.0" layoutY="483.0" mnemonicParsing="false" onAction="#clearFields" text="Clear">
             <font>
                 <Font size="14.0" />
             </font>
