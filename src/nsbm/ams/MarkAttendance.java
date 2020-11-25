@@ -25,41 +25,16 @@ public class MarkAttendance {
 
     String studentid;
     String date;
-    String atdday;
-    int today;
+    String today;
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
 
-    public MarkAttendance(String stdid, String atddate, int day) {
+    public MarkAttendance(String stdid, String atddate, String day) {
 
         studentid = stdid;
         date = atddate;
         today = day;
-
-        switch (today) {
-            case 1:
-                atdday = "Sun";
-                break;
-            case 2:
-                atdday = "Mon";
-                break;
-            case 3:
-                atdday = "Tue";
-                break;
-            case 4:
-                atdday = "Wed";
-                break;
-            case 5:
-                atdday = "Thu";
-                break;
-            case 6:
-                atdday = "Fri";
-                break;
-            case 7:
-                atdday = "Sat";
-                break;
-        }
 
         con = DatabaseConnection.ConnectDatabase();
 
@@ -72,7 +47,7 @@ public class MarkAttendance {
 
                 pstmt.setString(1, studentid);
                 pstmt.setString(2, date);
-                pstmt.setString(3, atdday);
+                pstmt.setString(3, today);
 
                 pstmt.executeUpdate();
 

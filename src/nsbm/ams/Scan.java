@@ -48,6 +48,7 @@ public class Scan extends javax.swing.JFrame {
     String degree;
     String datetime;
     int day;
+    String today;
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
@@ -470,7 +471,36 @@ public class Scan extends javax.swing.JFrame {
                             c.setTime(date);
                             day = c.get(Calendar.DAY_OF_WEEK);
 
-                            MarkAttendance markatd = new MarkAttendance(studentid, datetime, day);
+                            switch (day) {
+                                case 1:
+                                    today = "Sun";
+                                    break;
+                                case 2:
+                                    today = "Mon";
+                                    break;
+                                case 3:
+                                    today = "Tue";
+                                    break;
+                                case 4:
+                                    today = "Wed";
+                                    break;
+                                case 5:
+                                    today = "Thu";
+                                    break;
+                                case 6:
+                                    today = "Fri";
+                                    break;
+                                case 7:
+                                    today = "Sat";
+                                    break;
+                            }
+
+                            MarkAttendance markatd = new MarkAttendance(studentid, datetime, today);
+
+                            Student student = new Student();
+                            student.setStudentid(studentid);
+                            student.setDay(today);
+                            student.generateTimeTable();
 
                         } else {
 

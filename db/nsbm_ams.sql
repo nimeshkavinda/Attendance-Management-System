@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2020 at 05:43 PM
+-- Generation Time: Nov 25, 2020 at 12:30 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -35,6 +35,18 @@ CREATE TABLE `attendance` (
   `day` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`atdid`, `stdid`, `date`, `day`) VALUES
+(12, 0007608418, '2020/11/25 14:30:44', 'Wed'),
+(13, 0007608418, '2020/11/25 16:04:34', 'Wed'),
+(14, 0007608418, '2020/11/25 16:06:06', 'Wed'),
+(15, 0007608418, '2020/11/25 16:07:06', 'Wed'),
+(16, 0007608418, '2020/11/25 16:07:54', 'Wed'),
+(17, 0007608418, '2020/11/25 16:25:37', 'Wed');
+
 -- --------------------------------------------------------
 
 --
@@ -51,9 +63,25 @@ CREATE TABLE `degree` (
 --
 
 INSERT INTO `degree` (`did`, `name`) VALUES
-(1, 'Software Engineering'),
-(2, 'Computer Networks'),
-(3, 'Computer Security');
+(1, 'Business Management'),
+(2, 'Marketing Management'),
+(3, 'Accounting and Finance'),
+(4, 'Software Engineering'),
+(5, 'Computer Networks'),
+(6, 'Computer Security'),
+(7, 'Computer System Engineering'),
+(8, 'Interior Design');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `degree_module`
+--
+
+CREATE TABLE `degree_module` (
+  `did` int(11) NOT NULL,
+  `mid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -122,6 +150,25 @@ CREATE TABLE `student` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`stdid`, `fname`, `lname`, `dob`, `gender`, `nic`, `email`, `mobile`, `address`, `city`, `province`, `batch`, `faculty`, `did`) VALUES
+(0007608418, 'Nimesh', 'Kavinda', '03/08/2000', 'male', '200006800341', 'a@test.com', '0716956139', '148/A, Horana Road', 'Padukka', 'Western Province', '19.2', 'Faculty of Computing', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `time_table`
+--
+
+CREATE TABLE `time_table` (
+  `mid` int(11) NOT NULL,
+  `day` varchar(3) NOT NULL,
+  `time` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
 -- Indexes for dumped tables
 --
 
@@ -137,6 +184,13 @@ ALTER TABLE `attendance`
 --
 ALTER TABLE `degree`
   ADD PRIMARY KEY (`did`);
+
+--
+-- Indexes for table `degree_module`
+--
+ALTER TABLE `degree_module`
+  ADD PRIMARY KEY (`did`,`mid`),
+  ADD KEY `mid` (`mid`);
 
 --
 -- Indexes for table `employee`
@@ -158,6 +212,12 @@ ALTER TABLE `student`
   ADD KEY `did` (`did`);
 
 --
+-- Indexes for table `time_table`
+--
+ALTER TABLE `time_table`
+  ADD PRIMARY KEY (`mid`,`day`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -165,7 +225,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `atdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `atdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `employee`
@@ -184,10 +244,23 @@ ALTER TABLE `attendance`
   ADD CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`stdid`) REFERENCES `student` (`stdid`) ON UPDATE CASCADE;
 
 --
+-- Constraints for table `degree_module`
+--
+ALTER TABLE `degree_module`
+  ADD CONSTRAINT `degree_module_ibfk_1` FOREIGN KEY (`did`) REFERENCES `degree` (`did`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `degree_module_ibfk_2` FOREIGN KEY (`mid`) REFERENCES `module` (`mid`);
+
+--
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
   ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`did`) REFERENCES `degree` (`did`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `time_table`
+--
+ALTER TABLE `time_table`
+  ADD CONSTRAINT `time_table_ibfk_1` FOREIGN KEY (`mid`) REFERENCES `module` (`mid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

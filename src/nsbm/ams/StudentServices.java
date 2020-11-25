@@ -12,5 +12,6 @@ package nsbm.ams;
 public interface StudentServices {
     
     public void registerStudent();
+    public void generateTimeTable();
     
 }

@@ -16,13 +16,17 @@ import javax.mail.internet.*;
 public class SendEmail {
     
     String recipientEmail;
+    String studentid;
+    String today;
 
-    public SendEmail(String stdemail) {
+    public SendEmail(String stdemail, String stdid, String day) {
         
         final String username = "nimeshkavinda13@gmail.com";
         final String password = "";
         
         recipientEmail = stdemail;
+        studentid = stdid;
+        today = day;
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
