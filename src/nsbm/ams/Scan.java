@@ -501,7 +501,7 @@ public class Scan extends javax.swing.JFrame {
                             Student student = new Student();
                             student.setStudentid(studentid);
                             student.setDay(today);
-                            student.setContactInfo(studentid);
+                            student.setContactInfo();
                             student.generateTimeTable();
                             student.sendEmail();
 

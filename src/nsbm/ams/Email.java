@@ -34,7 +34,7 @@ public class Email {
     public void sendEmail() {
 
         final String username = "nsbmams@gmail.com";
-        final String password = "NSBM@ams";
+        final String password = "";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
