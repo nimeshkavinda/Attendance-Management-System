@@ -24,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -84,6 +85,8 @@ public class StudentReportController implements Initializable {
 
     String studentid;
 
+    ObservableList<Student> studentList = FXCollections.observableArrayList();
+
     /**
      * Initializes the controller class.
      *
@@ -98,8 +101,6 @@ public class StudentReportController implements Initializable {
     }
 
     public ObservableList<Student> getStudentList() {
-
-        ObservableList<Student> studentList = FXCollections.observableArrayList();
 
         Connection con = DatabaseConnection.ConnectDatabase();
         String qry = "SELECT * FROM student";
@@ -180,10 +181,34 @@ public class StudentReportController implements Initializable {
 
     @FXML
     private void filterStudent(ActionEvent event) {
+
+        studentid = txtSearch.getText();
+
+        if (studentid.isEmpty() || !studentid.matches("^[0-9]*$") || studentid.length() != 10) {
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Please make sure you have typed in the Student ID correctly");
+
+            alert.showAndWait();
+
+        } else {
+
+            tblStudent.getItems().stream()
+                    .filter(item -> item.getStudentid().equals(studentid))
+                    .findAny()
+                    .ifPresent((Student item) -> {
+                        tblStudent.getSelectionModel().select(item);
+                        tblStudent.scrollTo(item);
+                    });
+
+        }
     }
 
     @FXML
-    private void selectStudent(MouseEvent event) {
+    private void selectStudent(MouseEvent event
+    ) {
 
         Student student = tblStudent.getSelectionModel().getSelectedItem();
         studentid = student.getStudentid();
