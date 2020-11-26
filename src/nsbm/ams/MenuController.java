@@ -46,11 +46,15 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void studentReport(ActionEvent event) {
+    private void studentReport(ActionEvent event) throws IOException {
+        Pane paneStudentReport = FXMLLoader.load(getClass().getResource("StudentReport.fxml"));
+        paneMenu.getChildren().setAll(paneStudentReport);
     }
 
     @FXML
-    private void allocateResource(ActionEvent event) {
+    private void allocateResource(ActionEvent event) throws IOException {
+        Pane paneAllocateResource = FXMLLoader.load(getClass().getResource("AllocateResource.fxml"));
+        paneMenu.getChildren().setAll(paneAllocateResource);
     }
     
 }

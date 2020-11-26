@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="paneStudentReport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsbm.ams.StudentReportController">
+   <children>
+      <Hyperlink fx:id="linkHome" layoutX="75.0" layoutY="20.0" onAction="#toHome" text="Home">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Hyperlink>
+      <Label layoutX="128.0" layoutY="24.0" text="&gt; Student Report">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblStudent" layoutX="350.0" layoutY="120.0" onMouseClicked="#selectStudent" prefHeight="380.0" prefWidth="500.0">
+         <columns>
+            <TableColumn fx:id="colStdId" prefWidth="75.0" text="Student ID" />
+            <TableColumn fx:id="colFName" prefWidth="75.0" text="First Name" />
+            <TableColumn fx:id="colLName" prefWidth="75.0" text="Last Name" />
+            <TableColumn fx:id="colGender" prefWidth="75.0" text="Gender" />
+            <TableColumn fx:id="colDob" prefWidth="75.0" text="DOB" />
+            <TableColumn fx:id="colNic" prefWidth="75.0" text="NIC" />
+         </columns>
+      </TableView>
+      <Label layoutX="75.0" layoutY="80.0" text="Student Information">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="350.0" layoutY="80.0" text="Student ID:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtSearch" layoutX="450.0" layoutY="78.0" prefHeight="30.0" prefWidth="255.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="75.0" layoutY="141.0" text="Full Name:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFullName" layoutX="75.0" layoutY="166.0" text="Nimesh Kavinda">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="200.0" text="Faculty:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFaculty" layoutX="75.0" layoutY="225.0" text="Faculty of Computing">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="261.0" text="Batch:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblBatch" layoutX="75.0" layoutY="286.0" text="Plymouth Batch 8">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="320.0" text="Degree:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDegree" layoutX="75.0" layoutY="345.0" text="Software Engineering">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="389.0" text="Attendance Record:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAtdDays" layoutX="75.0" layoutY="465.0" text="120 Days">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAtdPercentage" layoutX="75.0" layoutY="409.0" text="60%">
+         <font>
+            <Font name="System Bold" size="42.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnSearch" layoutX="718.0" layoutY="78.0" mnemonicParsing="false" onAction="#filterStudent" prefHeight="30.0" prefWidth="85.0" text="Search">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
