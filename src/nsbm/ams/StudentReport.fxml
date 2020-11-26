@@ -51,7 +51,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblFullName" layoutX="75.0" layoutY="166.0" text="Nimesh Kavinda">
+      <Label fx:id="lblFullName" layoutX="75.0" layoutY="166.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -61,7 +61,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblFaculty" layoutX="75.0" layoutY="225.0" text="Faculty of Computing">
+      <Label fx:id="lblFaculty" layoutX="75.0" layoutY="225.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -71,7 +71,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblBatch" layoutX="75.0" layoutY="286.0" text="Plymouth Batch 8">
+      <Label fx:id="lblBatch" layoutX="75.0" layoutY="286.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -81,22 +81,22 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblDegree" layoutX="75.0" layoutY="345.0" text="Software Engineering">
+      <Label fx:id="lblDegree" layoutX="75.0" layoutY="345.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="75.0" layoutY="389.0" text="Attendance Record:">
+      <Label layoutX="75.0" layoutY="389.0" text="Attendance to Campus:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblAtdDays" layoutX="75.0" layoutY="465.0" text="120 Days">
+      <Label fx:id="lblAtdDays" layoutX="75.0" layoutY="465.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblAtdPercentage" layoutX="75.0" layoutY="409.0" text="60%">
+      <Label fx:id="lblAtdPercentage" layoutX="75.0" layoutY="409.0">
          <font>
             <Font name="System Bold" size="42.0" />
          </font>
