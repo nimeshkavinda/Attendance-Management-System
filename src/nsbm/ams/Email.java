@@ -22,25 +22,25 @@ public class Email {
 
     public Email(String module, String time) {
 
-        Student student = new Student();
-
-        recipientEmail = student.getEmail();
-        studentname = student.getFullname();
         lec = module;
         lectime = time;
 
     }
 
-    public void sendEmail() {
+    public void sendEmail(String email, String name) {
 
         final String username = "nsbmams@gmail.com";
         final String password = "NSBM@ams";
+        
+        Student student = new Student();
+        recipientEmail = email;
+        studentname = name;
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+        prop.put("mail.smtp.starttls.enable", "true");
 
         Session session;
         session = Session.getInstance(prop,
@@ -64,6 +64,7 @@ public class Email {
                     + lec
                     + "\n\n"
                     + "at"
+                    + "\n\n"
                     + lectime);
 
             Transport.send(message);

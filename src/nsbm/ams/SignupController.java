@@ -178,7 +178,7 @@ public class SignupController implements Initializable {
                     try {
 
                         PreparedStatement ps;
-                        ps = (PreparedStatement) con.prepareStatement("insert into employee (fname, lname, email, mobile, password, access_lvl) values (?,?,?,?,?," + selectedIndex + ")");
+                        ps = (PreparedStatement) con.prepareStatement("INSERT INTO employee (fname, lname, email, mobile, password, access_lvl) VALUES (?,?,?,?,?," + selectedIndex + ")");
 
                         ps.setString(1, fname);
                         ps.setString(2, lname);

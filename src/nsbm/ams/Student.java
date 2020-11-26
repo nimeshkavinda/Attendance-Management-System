@@ -109,68 +109,8 @@ public class Student implements StudentServices {
         this.day = day;
     }
 
-    public String getFname() {
-        return fname;
-    }
-
-    public String getLname() {
-        return lname;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getNic() {
-        return nic;
-    }
-
-    public String getStudentid() {
-        return studentid;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public String getFaculty() {
-        return faculty;
-    }
-
-    public String getBatch() {
-        return batch;
-    }
-
-    public String getDegree() {
-        return degree;
-    }
-
-    public int getDegreeid() {
-        return degreeid;
-    }
-
-    public String getDay() {
-        return day;
     }
 
     public String getFullname() {
@@ -282,13 +222,12 @@ public class Student implements StudentServices {
         }
 
     }
-    
-    @Override
-    public void setContactInfo(String stdid){
-        
+
+    public void setContactInfo() {
+
         Connection con = DatabaseConnection.ConnectDatabase();
-        String qry = "SELECT * FROM student WHERE stdid = '" + stdid + "'";
-        
+        String qry = "SELECT * FROM student WHERE stdid = '" + studentid + "'";
+
         if (con != null) {
 
             try {
@@ -300,28 +239,26 @@ public class Student implements StudentServices {
 
                 if (rs.next()) {
 
-                    fname = rs.getString("fname");
-                    lname = rs.getString("lname");
-                    email = rs.getString("email");
-                    
-                    fullname = fname + " " +lname;
+                    this.fname = rs.getString("fname");
+                    this.lname = rs.getString("lname");
+                    this.email = rs.getString("email");
+
+                    this.fullname = fname + " " + lname;
 
                 }
 
             } catch (SQLException ex) {
-
-                ex.printStackTrace();
-
             }
 
         }
-        
+
     }
 
     @Override
     public void generateTimeTable() {
 
         Connection con = DatabaseConnection.ConnectDatabase();
+
         String qry = "SELECT * FROM time_table INNER JOIN degree_module ON time_table.mid = degree_module.mid INNER JOIN student ON degree_module.did = student.did WHERE student.stdid = '" + studentid + "' AND time_table.day = '" + day + "'";
 
         if (con != null) {
@@ -338,24 +275,19 @@ public class Student implements StudentServices {
                     moduleid = rs.getString("mid");
                     moduleday = rs.getString("day");
                     time = rs.getString("time");
-
                 }
 
             } catch (SQLException ex) {
-
-                ex.printStackTrace();
-
             }
 
         }
-
     }
-    
-    public void sendEmail(){
-        
-        Email email = new Email(moduleid, time);
-        email.sendEmail();
-        
+
+    public void sendEmail() {
+
+        Email mail = new Email(moduleid, time);
+        mail.sendEmail(email, fullname);
+
     }
 
 }

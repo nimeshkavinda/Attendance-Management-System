@@ -79,7 +79,6 @@ public class Scan extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
         btnClose = new javax.swing.JButton();
-        btnSignout = new javax.swing.JButton();
         panelDashboard = new javax.swing.JPanel();
         panelInfo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -118,17 +117,10 @@ public class Scan extends javax.swing.JFrame {
         lblUser.setFont(lblUser.getFont().deriveFont(lblUser.getFont().getSize()+6f));
         lblUser.setFocusable(false);
 
-        btnClose.setText("Close");
+        btnClose.setText("Exit");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
-            }
-        });
-
-        btnSignout.setText("Sign out");
-        btnSignout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSignoutActionPerformed(evt);
             }
         });
 
@@ -142,8 +134,6 @@ public class Scan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSignout)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClose)
                 .addGap(39, 39, 39))
         );
@@ -154,8 +144,7 @@ public class Scan extends javax.swing.JFrame {
                 .addGroup(panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(btnClose)
-                    .addComponent(btnSignout))
+                    .addComponent(btnClose))
                 .addGap(38, 38, 38))
         );
 
@@ -406,7 +395,7 @@ public class Scan extends javax.swing.JFrame {
 
                     con = DatabaseConnection.ConnectDatabase();
 
-                    String qry = "select * from student where stdid = ?";
+                    String qry = "SELECT * FROM student WHERE stdid = ?";
 
                     try {
                         ps = con.prepareStatement(qry);
@@ -501,8 +490,8 @@ public class Scan extends javax.swing.JFrame {
                             Student student = new Student();
                             student.setStudentid(studentid);
                             student.setDay(today);
-                            student.setContactInfo(studentid);
                             student.generateTimeTable();
+                            student.setContactInfo();
                             student.sendEmail();
 
                         } else {
@@ -558,12 +547,6 @@ public class Scan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtIDKeyPressed
 
-    private void btnSignoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignoutActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-
-    }//GEN-LAST:event_btnSignoutActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -602,7 +585,6 @@ public class Scan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
-    private javax.swing.JButton btnSignout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;

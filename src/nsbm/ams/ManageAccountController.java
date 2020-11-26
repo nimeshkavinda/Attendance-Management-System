@@ -106,7 +106,7 @@ public class ManageAccountController implements Initializable {
 
             con = DatabaseConnection.ConnectDatabase();
 
-            String populateFields = "select * from employee where email = '" + email + "'";
+            String populateFields = "SELECT * FROM employee WHERE email = '" + email + "'";
 
             try {
 
@@ -222,7 +222,7 @@ public class ManageAccountController implements Initializable {
 
         con = DatabaseConnection.ConnectDatabase();
 
-        String qry = "update employee set fname = '" + newFName + "', lname = '" + newLName + "', email = '" + newEmail + "', mobile = '" + mobile + "', password = '" + newPass + "' where email = '" + email + "'";
+        String qry = "UPDATE employee SET fname = '" + newFName + "', lname = '" + newLName + "', email = '" + newEmail + "', mobile = '" + mobile + "', password = '" + newPass + "' WHERE email = '" + email + "'";
 
         try {
 
