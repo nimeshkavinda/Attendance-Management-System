@@ -248,9 +248,6 @@ public class Student implements StudentServices {
                 }
 
             } catch (SQLException ex) {
-
-                ex.printStackTrace();
-
             }
 
         }
@@ -261,7 +258,7 @@ public class Student implements StudentServices {
     public void generateTimeTable() {
 
         Connection con = DatabaseConnection.ConnectDatabase();
-        
+
         String qry = "SELECT * FROM time_table INNER JOIN degree_module ON time_table.mid = degree_module.mid INNER JOIN student ON degree_module.did = student.did WHERE student.stdid = '" + studentid + "' AND time_table.day = '" + day + "'";
 
         if (con != null) {
@@ -278,19 +275,9 @@ public class Student implements StudentServices {
                     moduleid = rs.getString("mid");
                     moduleday = rs.getString("day");
                     time = rs.getString("time");
-                    System.out.println(moduleid);
-                    System.out.println(moduleday);
-                    System.out.println(time);
-
-                }
-                else{
-                    System.out.println(rs);
                 }
 
             } catch (SQLException ex) {
-
-                ex.printStackTrace();
-
             }
 
         }
@@ -298,8 +285,8 @@ public class Student implements StudentServices {
 
     public void sendEmail() {
 
-        Email email = new Email(moduleid, time);
-        email.sendEmail();
+        Email mail = new Email(moduleid, time);
+        mail.sendEmail(email, fullname);
 
     }
 

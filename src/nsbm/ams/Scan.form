@@ -77,8 +77,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblUser" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnSignout" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnClose" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
@@ -92,7 +90,6 @@
                           <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
                           <Component id="lblUser" alignment="3" pref="31" max="32767" attributes="0"/>
                           <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnSignout" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
@@ -123,18 +120,10 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnClose">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Close"/>
+                <Property name="text" type="java.lang.String" value="Exit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCloseActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnSignout">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Sign out"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSignoutActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
