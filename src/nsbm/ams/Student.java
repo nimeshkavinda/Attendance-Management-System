@@ -45,6 +45,19 @@ public class Student implements StudentServices {
     private String time;
     private String fullname;
 
+    public Student() {
+
+    }
+
+    public Student(String fname, String lname, String dob, String gender, String nic, String studentid) {
+        this.fname = fname;
+        this.lname = lname;
+        this.dob = dob;
+        this.gender = gender;
+        this.nic = nic;
+        this.studentid = studentid;
+    }
+
     public void setFname(String fname) {
         this.fname = fname;
     }
@@ -107,6 +120,78 @@ public class Student implements StudentServices {
 
     public void setDay(String day) {
         this.day = day;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getNic() {
+        return nic;
+    }
+
+    public String getStudentid() {
+        return studentid;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public String getBatch() {
+        return batch;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public int getDegreeid() {
+        return degreeid;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getModuleid() {
+        return moduleid;
+    }
+
+    public String getModuleday() {
+        return moduleday;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public String getEmail() {
