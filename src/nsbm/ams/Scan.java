@@ -5,6 +5,8 @@
  */
 package nsbm.ams;
 
+import nsbm.ams.models.Attendance;
+import nsbm.ams.models.Student;
 import java.awt.event.KeyEvent;
 import java.io.PrintWriter;
 import java.io.StringWriter;

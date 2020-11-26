@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nsbm.ams;
+package nsbm.ams.models;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import nsbm.ams.DatabaseConnection;
 
 /**
  *
