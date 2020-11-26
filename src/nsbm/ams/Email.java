@@ -20,6 +20,7 @@ public class Email {
     String moduleid;
     String lectime;
     String lec;
+    String lechall;
 
     public Email(String module, String time) {
 
@@ -152,9 +153,17 @@ public class Email {
                     + "\n\n"
                     + "Please find your lecture schedule for today below"
                     + "\n\n"
+                    + "Module: "
                     + lec
-                    + " at "
-                    + lectime);
+                    + "\n"
+                    + "Time: "
+                    + lectime
+                    + "\n"
+                    + "Lecture Hall: "
+                    + lechall
+                    + "\n\n\n"
+                    + "Thank you. Have a nice day"
+            );
 
             Transport.send(message);
 
