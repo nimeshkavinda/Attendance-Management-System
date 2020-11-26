@@ -81,7 +81,7 @@ public class StudentReportController implements Initializable {
     private TableColumn<Student, String> colDob;
     @FXML
     private TableColumn<Student, String> colNic;
-    
+
     String studentid;
 
     /**
@@ -184,12 +184,149 @@ public class StudentReportController implements Initializable {
 
     @FXML
     private void selectStudent(MouseEvent event) {
-        
+
         Student student = tblStudent.getSelectionModel().getSelectedItem();
         studentid = student.getStudentid();
-        
-        
-        
-    }
 
+        Connection con = DatabaseConnection.ConnectDatabase();
+        String qry = "SELECT * FROM student WHERE stdid = '" + studentid + "'";
+
+        Statement st;
+        ResultSet rs;
+        int degreeid;
+        String degree = null;
+
+        try {
+
+            st = con.createStatement();
+            rs = st.executeQuery(qry);
+
+            if (rs.next()) {
+
+                lblFullName.setText(rs.getString("fname") + " " + rs.getString("lname"));
+                lblFaculty.setText(rs.getString("faculty"));
+                lblBatch.setText(rs.getString("batch"));
+                degreeid = rs.getInt("did");
+
+                if (degreeid != 0) {
+                    switch (degreeid) {
+                        case 1:
+                            degree = "Business Management";
+                            break;
+                        case 2:
+                            degree = "Marketing Management";
+                            break;
+                        case 3:
+                            degree = "Accounting and Finance";
+                            break;
+                        case 4:
+                            degree = "Software Engineering";
+                            break;
+                        case 5:
+                            degree = "Computer Networks";
+                            break;
+                        case 6:
+                            degree = "Computer Security";
+                            break;
+                        case 7:
+                            degree = "Computer System Engineering";
+                            break;
+                        case 8:
+                            degree = "Interior Design";
+                            break;
+                    }
+                }
+
+                lblDegree.setText(degree);
+
+            }
+
+        } catch (SQLException ex) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Something went wrong");
+            alert.setContentText("Failure to fetch data");
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("The exception stacktrace was:");
+
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0, 1);
+
+            alert.getDialogPane().setExpandableContent(expContent);
+
+            alert.showAndWait();
+
+        }
+
+        String qryCount = "SELECT COUNT(*) AS count FROM attendance WHERE stdid = '" + studentid + "'";
+
+        Statement stCount;
+        ResultSet rsCount;
+        int atdCount;
+        int atdAvg;
+
+        try {
+
+            stCount = con.createStatement();
+            rsCount = stCount.executeQuery(qryCount);
+
+            if (rsCount.next()) {
+                atdCount = rsCount.getInt("count");
+                atdAvg = atdCount / 365 * 100;
+                lblAtdDays.setText(atdCount + " Days");
+                lblAtdPercentage.setText(atdAvg + "%");
+            }
+
+        } catch (SQLException ex) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Something went wrong");
+            alert.setContentText("Failure to fetch data");
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("The exception stacktrace was:");
+
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0, 1);
+
+            alert.getDialogPane().setExpandableContent(expContent);
+
+            alert.showAndWait();
+
+        }
+
+    }
 }

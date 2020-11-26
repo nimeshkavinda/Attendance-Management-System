@@ -91,12 +91,12 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblAtdDays" layoutX="75.0" layoutY="465.0" text="120 Days">
+      <Label fx:id="lblAtdDays" layoutX="75.0" layoutY="465.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblAtdPercentage" layoutX="75.0" layoutY="409.0" text="60%">
+      <Label fx:id="lblAtdPercentage" layoutX="75.0" layoutY="409.0">
          <font>
             <Font name="System Bold" size="42.0" />
          </font>
