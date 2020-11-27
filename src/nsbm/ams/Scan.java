@@ -5,6 +5,7 @@
  */
 package nsbm.ams;
 
+import nsbm.ams.services.DatabaseConnection;
 import nsbm.ams.models.Attendance;
 import nsbm.ams.models.Student;
 import java.awt.event.KeyEvent;

@@ -5,6 +5,7 @@
  */
 package nsbm.ams;
 
+import nsbm.ams.services.DatabaseConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;

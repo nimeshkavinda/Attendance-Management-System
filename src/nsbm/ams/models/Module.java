@@ -9,9 +9,10 @@ package nsbm.ams.models;
  *
  * @author Nimesh
  */
-public interface StudentServices {
+public class Module {
     
-    public void registerStudent();
-    public void generateTimeTable();
+    String moduleid;
+    String modulename;
+    String lechall;
     
 }
