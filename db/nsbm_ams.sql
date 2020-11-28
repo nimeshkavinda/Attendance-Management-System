@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2020 at 06:49 AM
+-- Generation Time: Nov 28, 2020 at 03:09 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -34,19 +34,6 @@ CREATE TABLE `attendance` (
   `date` varchar(30) NOT NULL,
   `day` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `attendance`
---
-
-INSERT INTO `attendance` (`atdid`, `stdid`, `date`, `day`) VALUES
-(68, 0007608418, '2020/11/26 10:58:46', 'Thu'),
-(69, 0007608418, '2020/11/26 11:00:29', 'Thu'),
-(70, 0007608418, '2020/11/26 11:06:18', 'Thu'),
-(71, 0007608418, '2020/11/26 11:06:38', 'Thu'),
-(72, 0007608418, '2020/11/26 11:09:40', 'Thu'),
-(73, 0007608418, '2020/11/26 11:15:39', 'Thu'),
-(74, 0007608418, '2020/11/26 11:16:58', 'Thu');
 
 -- --------------------------------------------------------
 
@@ -136,7 +123,55 @@ CREATE TABLE `employee` (
 
 INSERT INTO `employee` (`empid`, `fname`, `lname`, `email`, `mobile`, `password`, `access_lvl`) VALUES
 (8, 'test', 'test', 'a@test.com', '0', 'a', 1),
-(14, 'Nimesh', 'K', 'a@nsbm.lk', '', 'a', 0);
+(14, 'Nimesh', 'Kavinda', 'nimesh@nsbm.lk', '0716956139', 'a', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecturehall`
+--
+
+CREATE TABLE `lecturehall` (
+  `lhid` varchar(10) NOT NULL,
+  `size` int(11) NOT NULL,
+  `mid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lecturehall`
+--
+
+INSERT INTO `lecturehall` (`lhid`, `size`, `mid`) VALUES
+('1', 150, 1),
+('10', 150, NULL),
+('11', 150, 6),
+('12', 150, 10),
+('13', 150, 16),
+('14', 150, 23),
+('15', 150, 9),
+('16', 400, NULL),
+('17', 400, NULL),
+('18', 400, NULL),
+('19', 400, NULL),
+('2', 150, NULL),
+('20', 400, NULL),
+('21', 400, NULL),
+('22', 400, NULL),
+('23', 400, NULL),
+('24', 400, NULL),
+('25', 400, NULL),
+('26', 800, NULL),
+('27', 800, NULL),
+('28', 800, NULL),
+('29', 800, NULL),
+('3', 150, NULL),
+('30', 800, NULL),
+('4', 150, NULL),
+('5', 150, NULL),
+('6', 150, NULL),
+('7', 150, NULL),
+('8', 150, NULL),
+('9', 150, NULL);
 
 -- --------------------------------------------------------
 
@@ -197,8 +232,8 @@ CREATE TABLE `student` (
   `address` varchar(30) NOT NULL,
   `city` varchar(20) NOT NULL,
   `province` varchar(20) NOT NULL,
-  `batch` varchar(20) NOT NULL,
-  `faculty` varchar(20) NOT NULL,
+  `faculty` varchar(30) NOT NULL,
+  `batch` varchar(30) NOT NULL,
   `did` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -206,7 +241,7 @@ CREATE TABLE `student` (
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`stdid`, `fname`, `lname`, `dob`, `gender`, `nic`, `email`, `mobile`, `address`, `city`, `province`, `batch`, `faculty`, `did`) VALUES
+INSERT INTO `student` (`stdid`, `fname`, `lname`, `dob`, `gender`, `nic`, `email`, `mobile`, `address`, `city`, `province`, `faculty`, `batch`, `did`) VALUES
 (0007608418, 'Nimesh', 'Kavinda', '2000/03/08', 'Male', '200006800341', 'nimeshkavinda13@gmail.com', '0716956139', '148/A, Horana Road', 'Padukka', 'Western', 'Faculty of Computing', 'Plymouth Batch 8', 4);
 
 -- --------------------------------------------------------
@@ -314,6 +349,13 @@ ALTER TABLE `employee`
   ADD PRIMARY KEY (`empid`);
 
 --
+-- Indexes for table `lecturehall`
+--
+ALTER TABLE `lecturehall`
+  ADD PRIMARY KEY (`lhid`),
+  ADD KEY `mid` (`mid`);
+
+--
 -- Indexes for table `module`
 --
 ALTER TABLE `module`
@@ -340,7 +382,7 @@ ALTER TABLE `time_table`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `atdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `atdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `employee`
@@ -364,6 +406,12 @@ ALTER TABLE `attendance`
 ALTER TABLE `degree_module`
   ADD CONSTRAINT `degree_module_ibfk_1` FOREIGN KEY (`did`) REFERENCES `degree` (`did`) ON UPDATE CASCADE,
   ADD CONSTRAINT `degree_module_ibfk_2` FOREIGN KEY (`mid`) REFERENCES `module` (`mid`);
+
+--
+-- Constraints for table `lecturehall`
+--
+ALTER TABLE `lecturehall`
+  ADD CONSTRAINT `lecturehall_ibfk_1` FOREIGN KEY (`mid`) REFERENCES `module` (`mid`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student`
