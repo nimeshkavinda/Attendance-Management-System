@@ -34,7 +34,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import nsbm.ams.models.LectureHall;
-import nsbm.ams.models.Student;
 import nsbm.ams.services.DatabaseConnection;
 
 /**
