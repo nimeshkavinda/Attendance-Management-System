@@ -122,7 +122,7 @@ public class Email {
     public void getLectureHall() {
 
         Connection con = DatabaseConnection.ConnectDatabase();
-        String qry = "SELECT * FROM lecturehall WHERE mid = '" + moduleid + "'";
+        String qry = "SELECT * FROM lecture_hall WHERE mid = '" + moduleid + "'";
 
         Statement st;
         ResultSet rs;

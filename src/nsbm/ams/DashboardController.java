@@ -10,11 +10,20 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.nio.file.Files;
+import static java.nio.file.Files.list;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,14 +35,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
+import nsbm.ams.services.DatabaseConnection;
 
 /**
  * FXML Controller class
@@ -104,6 +118,8 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        updateActivity();
+
         Platform.runLater(() -> {
 
             Pane paneLogin = null;
@@ -155,6 +171,7 @@ public class DashboardController implements Initializable {
             }
 
         });
+
     }
 
     public void setName(String name) {
@@ -205,7 +222,42 @@ public class DashboardController implements Initializable {
                 new java.util.TimerTask() {
             @Override
             public void run() {
-//                String populateFields = "SELECT * FROM employee WHERE email = '" + email + "'";
+
+                Connection con = DatabaseConnection.ConnectDatabase();
+
+                String lectureHall;
+                String lectureHallCap;
+                String moduleName;
+                String attendees;
+
+                String qry = "SELECT * FROM lecture_hall WHERE mid IS NOT NULL";
+
+                Statement st;
+                ResultSet rs;
+
+                try {
+
+                    st = con.createStatement();
+                    rs = st.executeQuery(qry);
+
+                    List<String> listLhId = new ArrayList<String>();
+                    List<String> listSize = new ArrayList<String>();
+
+                    while (rs.next()) {
+                        lectureHall = rs.getString("lhid");
+                        lectureHallCap = rs.getString("size");
+                        listLhId.add(lectureHall);
+                        listSize.add(lectureHallCap);
+                        System.out.println(lectureHall);
+                        System.out.println(lectureHallCap);
+                    }
+
+                    String[] hallId = listLhId.toArray(new String[]{});
+                    String[] hallSize = listSize.toArray(new String[]{});
+
+                } catch (SQLException ex) {
+                }
+
             }
         },
                 5000
