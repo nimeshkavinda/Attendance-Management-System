@@ -200,4 +200,16 @@ public class DashboardController implements Initializable {
 
     }
 
+    private void updateActivity() {
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+            @Override
+            public void run() {
+//                String populateFields = "SELECT * FROM employee WHERE email = '" + email + "'";
+            }
+        },
+                5000
+        );
+    }
+
 }

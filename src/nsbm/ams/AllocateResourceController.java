@@ -167,7 +167,7 @@ public class AllocateResourceController implements Initializable {
     public ObservableList<LectureHall> getLectureHallList() {
 
         Connection con = DatabaseConnection.ConnectDatabase();
-        String qry = "SELECT * FROM lecturehall";
+        String qry = "SELECT * FROM lecture_hall";
 
         Statement st;
         ResultSet rs;
@@ -248,7 +248,7 @@ public class AllocateResourceController implements Initializable {
         String lecturehall = lechall.getLecturehall();
 
         Connection con = DatabaseConnection.ConnectDatabase();
-        String qry = "SELECT * FROM lecturehall WHERE lhid = '" + lecturehall + "'";
+        String qry = "SELECT * FROM lecture_hall WHERE lhid = '" + lecturehall + "'";
 
         Statement st;
         ResultSet rs;
@@ -467,7 +467,7 @@ public class AllocateResourceController implements Initializable {
 
         Connection con = DatabaseConnection.ConnectDatabase();
         PreparedStatement pstmt;
-        String qry = "UPDATE lecturehall SET mid = '" + moduleId + "' WHERE lhid = '" + lechallId + "'";
+        String qry = "UPDATE lecture_hall SET mid = '" + moduleId + "' WHERE lhid = '" + lechallId + "'";
 
         try {
 
@@ -548,7 +548,7 @@ public class AllocateResourceController implements Initializable {
         
         Connection con = DatabaseConnection.ConnectDatabase();
         PreparedStatement pstmt;
-        String qry = "UPDATE lecturehall SET mid = NULL WHERE lhid = '" + lechallId + "'";
+        String qry = "UPDATE lecture_hall SET mid = NULL WHERE lhid = '" + lechallId + "'";
 
         try {
 

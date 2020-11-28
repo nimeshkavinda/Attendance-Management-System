@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -455,7 +456,7 @@ public class Scan extends javax.swing.JFrame {
                             lblFaculty.setText(faculty);
                             lblDegree.setText(degree);
 
-                            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
                             Date date = new Date();
                             datetime = dateFormat.format(date);
 
@@ -496,6 +497,34 @@ public class Scan extends javax.swing.JFrame {
                             student.generateTimeTable();
                             student.setContactInfo();
                             student.sendEmail();
+
+                            String qry2 = "SELECT * FROM time_table INNER JOIN degree_module ON time_table.mid = degree_module.mid INNER JOIN student ON degree_module.did = student.did WHERE student.stdid = '" + studentid + "'  AND time_table.day = '" + today + "'";
+
+                            try {
+
+                                Statement st;
+                                ResultSet rs;
+
+                                st = con.createStatement();
+                                rs = st.executeQuery(qry2);
+
+                                if (rs.next()) {
+
+                                    int mid = rs.getInt("mid");
+
+                                    try {
+
+                                        String qry3 = "INSERT INTO module_date(date, mid) VALUES('" + datetime + "', " + mid + ")";
+                                        PreparedStatement pstmt;
+                                        pstmt = (PreparedStatement) con.prepareStatement(qry3);
+                                        pstmt.executeUpdate();
+
+                                    } catch (SQLException exc) {
+                                    }
+                                }
+
+                            } catch (SQLException e) {
+                            }
 
                         } else {
 
