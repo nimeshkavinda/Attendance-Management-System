@@ -23,9 +23,9 @@
       </Label>
       <TableView fx:id="tblLecHall" layoutX="400.0" layoutY="75.0" onMouseClicked="#selectLecHall" prefHeight="420.0" prefWidth="450.0">
         <columns>
-          <TableColumn fx:id="colLecHall" minWidth="90.0" prefWidth="90.0" text="Lecture Hall" />
-            <TableColumn fx:id="colHallSize" prefWidth="75.0" text="Hall Size" />
-          <TableColumn fx:id="colModule" minWidth="250.0" prefWidth="250.0" text="Lecture" />
+          <TableColumn fx:id="colLecHall" minWidth="130.0" prefWidth="130.0" text="Lecture Hall" />
+            <TableColumn fx:id="colHallSize" minWidth="180.0" prefWidth="180.0" text="Lecture Hall Capacity" />
+          <TableColumn fx:id="colModule" minWidth="110.0" prefWidth="110.0" text="Lecture ID" />
         </columns>
       </TableView>
       <Label layoutX="75.0" layoutY="80.0" text="Lecture Hall Information">
