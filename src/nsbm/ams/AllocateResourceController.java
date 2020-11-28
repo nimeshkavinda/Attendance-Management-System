@@ -231,6 +231,7 @@ public class AllocateResourceController implements Initializable {
         colModule.setCellValueFactory(new PropertyValueFactory<>("module"));
 
         tblLecHall.setItems(lecHallList);
+        tblLecHall.getSortOrder().add(colHallSize);
 
     }
 
