@@ -5,9 +5,14 @@
  */
 package nsbm.ams.models;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
+import nsbm.ams.services.DatabaseConnection;
 
 /**
  *
@@ -20,13 +25,14 @@ public class Email {
     String moduleid;
     String lectime;
     String lec;
-    String lechall = "TBA";
+    String lechall;
 
     public Email(String module, String time) {
 
         moduleid = module;
         lectime = time;
         getLecture();
+        getLectureHall();
 
     }
 
@@ -109,6 +115,32 @@ public class Email {
                     break;
             }
 
+        }
+
+    }
+
+    public void getLectureHall() {
+
+        Connection con = DatabaseConnection.ConnectDatabase();
+        String qry = "SELECT * FROM lecturehall WHERE mid = '" + moduleid + "'";
+
+        Statement st;
+        ResultSet rs;
+
+        try {
+
+            st = con.createStatement();
+            rs = st.executeQuery(qry);
+
+            if (rs.next()) {
+
+                lechall = rs.getString("lhid");
+
+            } else {
+                lechall = "TBA";
+            }
+            
+        } catch (SQLException ex) {
         }
 
     }
