@@ -20,7 +20,7 @@ public class Email {
     String moduleid;
     String lectime;
     String lec;
-    String lechall;
+    String lechall = "TBA";
 
     public Email(String module, String time) {
 

@@ -41,7 +41,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtSearch" layoutX="450.0" layoutY="78.0" prefHeight="30.0" prefWidth="255.0">
+      <TextField fx:id="txtSearch" layoutX="450.0" layoutY="78.0" prefHeight="30.0" prefWidth="200.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -101,7 +101,7 @@
             <Font name="System Bold" size="42.0" />
          </font>
       </Label>
-      <Button fx:id="btnSearch" layoutX="718.0" layoutY="78.0" mnemonicParsing="false" onAction="#filterStudent" prefHeight="30.0" prefWidth="85.0" text="Search">
+      <Button fx:id="btnSearch" layoutX="658.0" layoutY="78.0" mnemonicParsing="false" onAction="#filterStudent" prefHeight="30.0" prefWidth="85.0" text="Search">
          <font>
             <Font size="14.0" />
          </font>

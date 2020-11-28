@@ -5,6 +5,7 @@
  */
 package nsbm.ams;
 
+import nsbm.ams.services.DatabaseConnection;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

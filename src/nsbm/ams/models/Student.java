@@ -5,6 +5,7 @@
  */
 package nsbm.ams.models;
 
+import nsbm.ams.services.StudentServices;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Connection;
@@ -17,7 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import nsbm.ams.DatabaseConnection;
+import nsbm.ams.services.DatabaseConnection;
 
 /**
  *
