@@ -29,6 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -87,7 +88,7 @@ public class AllocateResourceController implements Initializable {
 
     @FXML
     private Button btnAssignLec;
-    
+
     ObservableList<LectureHall> lectureHallList = FXCollections.observableArrayList();
 
     /**
@@ -237,7 +238,152 @@ public class AllocateResourceController implements Initializable {
     }
 
     @FXML
+    private void selectLecHall(MouseEvent event) {
+
+        LectureHall lechall = tblLecHall.getSelectionModel().getSelectedItem();
+        String lecturehall = lechall.getLecturehall();
+
+        Connection con = DatabaseConnection.ConnectDatabase();
+        String qry = "SELECT * FROM lecturehall WHERE lhid = '" + lecturehall + "'";
+
+        Statement st;
+        ResultSet rs;
+        int moduleid;
+        String module = null;
+
+        try {
+
+            st = con.createStatement();
+            rs = st.executeQuery(qry);
+
+            if (rs.next()) {
+
+                lblLecHall.setText(rs.getString("lhid"));
+                lblHallSize.setText(rs.getString("size"));
+                moduleid = rs.getInt("mid");
+
+                switch (moduleid) {
+                    case 1:
+                        module = "International Business";
+                        break;
+                    case 2:
+                        module = "Operations Management";
+                        break;
+                    case 3:
+                        module = "Business Ethics";
+                        break;
+                    case 4:
+                        module = "Management Accounting";
+                        break;
+                    case 5:
+                        module = "International Marketing";
+                        break;
+                    case 6:
+                        module = "SE with Java";
+                        break;
+                    case 7:
+                        module = "Web Development Platforms";
+                        break;
+                    case 8:
+                        module = "Databases";
+                        break;
+                    case 9:
+                        module = "Network Security";
+                        break;
+                    case 10:
+                        module = "Internet of Things";
+                        break;
+                    case 11:
+                        module = "Design Communication";
+                        break;
+                    case 12:
+                        module = "Building Science";
+                        break;
+                    case 13:
+                        module = "Algorithms";
+                        break;
+                    case 14:
+                        module = "Operating Systems";
+                        break;
+                    case 15:
+                        module = "Engineering Mathematics";
+                        break;
+                    case 16:
+                        module = "Digital Marketing";
+                        break;
+                    case 17:
+                        module = "Advertising";
+                        break;
+                    case 18:
+                        module = "Financial Accounting";
+                        break;
+                    case 19:
+                        module = "Taxation";
+                        break;
+                    case 20:
+                        module = "Servers and Datacenters";
+                        break;
+                    case 21:
+                        module = "Incident Prevention";
+                        break;
+                    case 22:
+                        module = "Network Monitoring";
+                        break;
+                    case 23:
+                        module = "Penetration Testing";
+                        break;
+                    case 24:
+                        module = "Design Culture";
+                        break;
+                    default:
+                        module = "No lecture has been assigned";
+
+                }
+            }
+
+            lblModule.setText(module);
+
+        } catch (SQLException ex) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Something went wrong");
+            alert.setContentText("Failure to fetch data");
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("The exception stacktrace was:");
+
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0, 1);
+
+            alert.getDialogPane().setExpandableContent(expContent);
+
+            alert.showAndWait();
+
+        }
+
+    }
+
+    @FXML
     private void assignLec(ActionEvent event) {
+        
+        
+        
     }
 
 }

@@ -203,8 +203,7 @@ public class StudentReportController implements Initializable {
     }
 
     @FXML
-    private void selectStudent(MouseEvent event
-    ) {
+    private void selectStudent(MouseEvent event) {
 
         Student student = tblStudent.getSelectionModel().getSelectedItem();
         studentid = student.getStudentid();
