@@ -70,6 +70,30 @@ public class DashboardController implements Initializable {
     String empid;
     String flname;
     String imagename;
+    @FXML
+    private Label lblStdId1;
+    @FXML
+    private Label lblStdFac1;
+    @FXML
+    private Label lblStdDeg1;
+    @FXML
+    private Label lblStdId2;
+    @FXML
+    private Label lblStdFac2;
+    @FXML
+    private Label lblStdDeg2;
+    @FXML
+    private Label lblLhId1;
+    @FXML
+    private Label lblModule1;
+    @FXML
+    private Label lblAtd1;
+    @FXML
+    private Label lblLhId2;
+    @FXML
+    private Label lblModule2;
+    @FXML
+    private Label lblAtd2;
 
     /**
      * Initializes the controller class.
