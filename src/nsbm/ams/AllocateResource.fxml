@@ -91,5 +91,10 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Button fx:id="btnClearLec" layoutX="135.0" layoutY="465.0" mnemonicParsing="false" onAction="#clearLec" text="Clear Hall">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

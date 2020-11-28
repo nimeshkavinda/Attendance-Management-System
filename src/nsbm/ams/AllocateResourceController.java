@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,6 +35,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import nsbm.ams.models.LectureHall;
+import nsbm.ams.models.Student;
 import nsbm.ams.services.DatabaseConnection;
 
 /**
@@ -89,6 +91,8 @@ public class AllocateResourceController implements Initializable {
     private Button btnAssignLec;
 
     ObservableList<LectureHall> lectureHallList = FXCollections.observableArrayList();
+    @FXML
+    private Button btnClearLec;
 
     /**
      * Initializes the controller class.
@@ -380,9 +384,240 @@ public class AllocateResourceController implements Initializable {
 
     @FXML
     private void assignLec(ActionEvent event) {
-        
-        
-        
+
+        String moduleName = comboModule.getValue();
+        int lechallId = Integer.parseInt(lblLecHall.getText());
+        int moduleId = 0;
+
+        switch (moduleName) {
+            case "International Business":
+                moduleId = 1;
+                break;
+            case "Operations Management":
+                moduleId = 2;
+                break;
+            case "Business Ethics":
+                moduleId = 3;
+                break;
+            case "Management Accounting":
+                moduleId = 4;
+                break;
+            case "International Marketing":
+                moduleId = 5;
+                break;
+            case "SE with Java":
+                moduleId = 6;
+                break;
+            case "Web Development Platforms":
+                moduleId = 7;
+                break;
+            case "Databases":
+                moduleId = 8;
+                break;
+            case "Network Security":
+                moduleId = 9;
+                break;
+            case "Internet of Things":
+                moduleId = 10;
+                break;
+            case "Design Communication":
+                moduleId = 11;
+                break;
+            case "Building Science":
+                moduleId = 12;
+                break;
+            case "Algorithms":
+                moduleId = 13;
+                break;
+            case "Operating Systems":
+                moduleId = 14;
+                break;
+            case "Engineering Mathematics":
+                moduleId = 15;
+                break;
+            case "Digital Marketing":
+                moduleId = 16;
+                break;
+            case "Advertising":
+                moduleId = 17;
+                break;
+            case "Financial Accounting":
+                moduleId = 18;
+                break;
+            case "Taxation":
+                moduleId = 19;
+                break;
+            case "Servers and Datacenters":
+                moduleId = 20;
+                break;
+            case "Incident Prevention":
+                moduleId = 21;
+                break;
+            case "Network Monitoring":
+                moduleId = 22;
+                break;
+            case "Penetration Testing":
+                moduleId = 23;
+                break;
+            case "Design Culture":
+                moduleId = 24;
+                break;
+        }
+
+        Connection con = DatabaseConnection.ConnectDatabase();
+        PreparedStatement pstmt;
+        String qry = "UPDATE lecturehall SET mid = '" + moduleId + "' WHERE lhid = '" + lechallId + "'";
+
+        try {
+
+            pstmt = con.prepareStatement(qry);
+            int result = pstmt.executeUpdate();
+
+            if (result > 0) {
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("Lecture hall updated");
+                alert.setContentText("Module has been assigned to to the selected lecture hall");
+
+                alert.showAndWait();
+
+                tblLecHall.getItems().clear();
+                loadLectureHallList();
+                
+                comboFaculty.valueProperty().set(null);
+                comboDegree.valueProperty().set(null);
+                comboModule.valueProperty().set(null);
+
+            } else {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Couldn't update");
+                alert.setContentText("Failed to assign the module to the selected lecture hall");
+
+                alert.showAndWait();
+                
+                comboFaculty.valueProperty().set(null);
+                comboDegree.valueProperty().set(null);
+                comboModule.valueProperty().set(null);
+
+            }
+
+        } catch (SQLException ex) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Oops, that did not work");
+            alert.setContentText("Failed to make the updates");
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("The exception stacktrace was:");
+
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0, 1);
+
+            alert.getDialogPane().setExpandableContent(expContent);
+
+            alert.showAndWait();
+
+        }
+
     }
 
+    @FXML
+    private void clearLec(ActionEvent event) {
+        
+        int lechallId = Integer.parseInt(lblLecHall.getText());
+        
+        Connection con = DatabaseConnection.ConnectDatabase();
+        PreparedStatement pstmt;
+        String qry = "UPDATE lecturehall SET mid = NULL WHERE lhid = '" + lechallId + "'";
+
+        try {
+
+            pstmt = con.prepareStatement(qry);
+            int result = pstmt.executeUpdate();
+
+            if (result > 0) {
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("Lecture hall updated");
+                alert.setContentText("Module has been unassigned from the selected lecture hall");
+
+                alert.showAndWait();
+
+                tblLecHall.getItems().clear();
+                loadLectureHallList();
+                
+                comboFaculty.valueProperty().set(null);
+                comboDegree.valueProperty().set(null);
+                comboModule.valueProperty().set(null);
+
+            } else {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Couldn't update");
+                alert.setContentText("Failed to unassign the module from the selected lecture hall");
+
+                alert.showAndWait();
+                
+                comboFaculty.valueProperty().set(null);
+                comboDegree.valueProperty().set(null);
+                comboModule.valueProperty().set(null);
+
+            }
+
+        } catch (SQLException ex) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Oops, that did not work");
+            alert.setContentText("Failed to make the updates");
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("The exception stacktrace was:");
+
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0, 1);
+
+            alert.getDialogPane().setExpandableContent(expContent);
+
+            alert.showAndWait();
+
+        }
+        
+    }
 }
