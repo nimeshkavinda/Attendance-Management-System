@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2020 at 03:09 PM
+-- Generation Time: Nov 29, 2020 at 10:47 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -34,6 +34,33 @@ CREATE TABLE `attendance` (
   `date` varchar(30) NOT NULL,
   `day` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`atdid`, `stdid`, `date`, `day`) VALUES
+(106, 0007608418, '2020/11/29', 'Sun'),
+(107, 0007608418, '2020/11/29', 'Sun'),
+(108, 0007608418, '2020/11/29', 'Sun'),
+(109, 0007608418, '2020/11/29', 'Sun'),
+(110, 0007608418, '2020/11/29', 'Sun'),
+(111, 0007608418, '2020/11/29', 'Sun'),
+(112, 0007608418, '2020/11/29', 'Sun'),
+(113, 0007608418, '2020/11/29', 'Sun'),
+(114, 0007608418, '2020/11/29', 'Sun'),
+(115, 0007608418, '2020/11/29', 'Sun'),
+(116, 0007608418, '2020/11/29', 'Sun'),
+(117, 0007608418, '2020/11/29', 'Sun'),
+(118, 0007608418, '2020/11/29', 'Sun'),
+(119, 0007608418, '2020/11/29', 'Sun'),
+(120, 0007608418, '2020/11/29', 'Sun'),
+(121, 0007608418, '2020/11/29', 'Sun'),
+(122, 0007608418, '2020/11/29', 'Sun'),
+(123, 0007608418, '2020/11/29', 'Sun'),
+(124, 0007608418, '2020/11/29', 'Sun'),
+(125, 0007608418, '2020/11/29', 'Sun'),
+(126, 1234567890, '2020/11/29', 'Sun');
 
 -- --------------------------------------------------------
 
@@ -122,31 +149,30 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`empid`, `fname`, `lname`, `email`, `mobile`, `password`, `access_lvl`) VALUES
-(8, 'test', 'test', 'a@test.com', '0', 'a', 1),
 (14, 'Nimesh', 'Kavinda', 'nimesh@nsbm.lk', '0716956139', 'a', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lecturehall`
+-- Table structure for table `lecture_hall`
 --
 
-CREATE TABLE `lecturehall` (
+CREATE TABLE `lecture_hall` (
   `lhid` varchar(10) NOT NULL,
   `size` int(11) NOT NULL,
   `mid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `lecturehall`
+-- Dumping data for table `lecture_hall`
 --
 
-INSERT INTO `lecturehall` (`lhid`, `size`, `mid`) VALUES
+INSERT INTO `lecture_hall` (`lhid`, `size`, `mid`) VALUES
 ('1', 150, 1),
-('10', 150, NULL),
-('11', 150, 6),
-('12', 150, 10),
-('13', 150, 16),
+('10', 150, 6),
+('11', 150, NULL),
+('12', 150, 16),
+('13', 150, NULL),
 ('14', 150, 23),
 ('15', 150, 9),
 ('16', 400, NULL),
@@ -217,6 +243,33 @@ INSERT INTO `module` (`mid`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `module_date`
+--
+
+CREATE TABLE `module_date` (
+  `mdid` int(11) NOT NULL,
+  `date` varchar(30) NOT NULL,
+  `mid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `module_date`
+--
+
+INSERT INTO `module_date` (`mdid`, `date`, `mid`) VALUES
+(6, '2020/11/29', 6),
+(7, '2020/11/29', 6),
+(8, '2020/11/29', 6),
+(9, '2020/11/29', 1),
+(10, '2020/11/29', 3),
+(11, '2020/11/29', 1),
+(12, '2020/11/29', 1),
+(13, '2020/11/29', 1),
+(14, '2020/11/29', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student`
 --
 
@@ -242,7 +295,8 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`stdid`, `fname`, `lname`, `dob`, `gender`, `nic`, `email`, `mobile`, `address`, `city`, `province`, `faculty`, `batch`, `did`) VALUES
-(0007608418, 'Nimesh', 'Kavinda', '2000/03/08', 'Male', '200006800341', 'nimeshkavinda13@gmail.com', '0716956139', '148/A, Horana Road', 'Padukka', 'Western', 'Faculty of Computing', 'Plymouth Batch 8', 4);
+(0007608418, 'Nimesh', 'Kavinda', '2000/03/08', 'Male', '200006800341', 'nimeshkavinda13@gmail.com', '0716956139', '148/A, Horana Road', 'Padukka', 'Western', 'Faculty of Computing', 'Plymouth Batch 8', 4),
+(1234567890, 'Sample', 'Student', '2020/11/01', 'Male', '1', 'test@test.com', '1', 'test', 'test', 'test', 'Faculty of Business', 'Plymouth Batch 7', 1);
 
 -- --------------------------------------------------------
 
@@ -349,9 +403,9 @@ ALTER TABLE `employee`
   ADD PRIMARY KEY (`empid`);
 
 --
--- Indexes for table `lecturehall`
+-- Indexes for table `lecture_hall`
 --
-ALTER TABLE `lecturehall`
+ALTER TABLE `lecture_hall`
   ADD PRIMARY KEY (`lhid`),
   ADD KEY `mid` (`mid`);
 
@@ -360,6 +414,13 @@ ALTER TABLE `lecturehall`
 --
 ALTER TABLE `module`
   ADD PRIMARY KEY (`mid`);
+
+--
+-- Indexes for table `module_date`
+--
+ALTER TABLE `module_date`
+  ADD PRIMARY KEY (`mdid`),
+  ADD KEY `mid` (`mid`);
 
 --
 -- Indexes for table `student`
@@ -382,13 +443,19 @@ ALTER TABLE `time_table`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `atdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `atdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
   MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `module_date`
+--
+ALTER TABLE `module_date`
+  MODIFY `mdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -408,10 +475,16 @@ ALTER TABLE `degree_module`
   ADD CONSTRAINT `degree_module_ibfk_2` FOREIGN KEY (`mid`) REFERENCES `module` (`mid`);
 
 --
--- Constraints for table `lecturehall`
+-- Constraints for table `lecture_hall`
 --
-ALTER TABLE `lecturehall`
-  ADD CONSTRAINT `lecturehall_ibfk_1` FOREIGN KEY (`mid`) REFERENCES `module` (`mid`) ON UPDATE CASCADE;
+ALTER TABLE `lecture_hall`
+  ADD CONSTRAINT `lecture_hall_ibfk_1` FOREIGN KEY (`mid`) REFERENCES `module` (`mid`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `module_date`
+--
+ALTER TABLE `module_date`
+  ADD CONSTRAINT `module_date_ibfk_1` FOREIGN KEY (`mid`) REFERENCES `module` (`mid`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student`
