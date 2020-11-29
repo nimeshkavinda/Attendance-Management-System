@@ -308,10 +308,12 @@ public class StudentReportController implements Initializable {
             rsCount = stCount.executeQuery(qryCount);
 
             if (rsCount.next()) {
+                
                 atdCount = rsCount.getInt("count");
-                atdAvg = atdCount / 365 * 100;
+                atdAvg = 100*atdCount/250;
                 lblAtdDays.setText(atdCount + " Days");
                 lblAtdPercentage.setText(atdAvg + "%");
+                
             }
 
         } catch (SQLException ex) {

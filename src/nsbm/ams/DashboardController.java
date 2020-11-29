@@ -14,11 +14,20 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +43,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
+import nsbm.ams.services.DatabaseConnection;
 
 /**
  * FXML Controller class
@@ -71,18 +81,6 @@ public class DashboardController implements Initializable {
     String flname;
     String imagename;
     @FXML
-    private Label lblStdId1;
-    @FXML
-    private Label lblStdFac1;
-    @FXML
-    private Label lblStdDeg1;
-    @FXML
-    private Label lblStdId2;
-    @FXML
-    private Label lblStdFac2;
-    @FXML
-    private Label lblStdDeg2;
-    @FXML
     private Label lblLhId1;
     @FXML
     private Label lblModule1;
@@ -94,6 +92,18 @@ public class DashboardController implements Initializable {
     private Label lblModule2;
     @FXML
     private Label lblAtd2;
+    @FXML
+    private Label lblLhId3;
+    @FXML
+    private Label lblModule3;
+    @FXML
+    private Label lblAtd3;
+    @FXML
+    private Label lblLhId4;
+    @FXML
+    private Label lblModule4;
+    @FXML
+    private Label lblAtd4;
 
     /**
      * Initializes the controller class.
@@ -104,6 +114,16 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    showLecHalls();
+                });
+            }
+        }, 1000, 1000);
+
         Platform.runLater(() -> {
 
             Pane paneLogin = null;
@@ -155,6 +175,7 @@ public class DashboardController implements Initializable {
             }
 
         });
+
     }
 
     public void setName(String name) {
@@ -200,4 +221,47 @@ public class DashboardController implements Initializable {
 
     }
 
+    public void showLecHalls() {
+
+        Connection con = DatabaseConnection.ConnectDatabase();
+
+        String qry = "SELECT lecture_hall.lhid, lecture_hall.size, module.name, COUNT(module_date.mid) AS value_occurrence FROM module_date INNER JOIN module ON module_date.mid = module.mid INNER JOIN lecture_hall ON lecture_hall.mid = module_date.mid GROUP BY module_date.mid ORDER BY value_occurrence DESC LIMIT 4";
+
+        Statement st;
+        ResultSet rs;
+
+        try {
+
+            st = con.createStatement();
+            rs = st.executeQuery(qry);
+
+            int i = 0;
+
+            while (rs.next()) {
+                i++;
+
+                if (i == 1) {
+                    lblLhId1.setText(rs.getString("lhid"));
+                    lblModule1.setText(rs.getString("name"));
+                    lblAtd1.setText(rs.getString("value_occurrence") + "/ " + rs.getString("size"));
+                } else if (i == 2) {
+                    lblLhId2.setText(rs.getString("lhid"));
+                    lblModule2.setText(rs.getString("name"));
+                    lblAtd2.setText(rs.getString("value_occurrence") + "/ " + rs.getString("size"));
+                } else if (i == 3) {
+                    lblLhId3.setText(rs.getString("lhid"));
+                    lblModule3.setText(rs.getString("name"));
+                    lblAtd3.setText(rs.getString("value_occurrence") + "/ " + rs.getString("size"));
+                } else if (i == 4) {
+                    lblLhId4.setText(rs.getString("lhid"));
+                    lblModule4.setText(rs.getString("name"));
+                    lblAtd4.setText(rs.getString("value_occurrence") + "/ " + rs.getString("size"));
+                }
+
+            }
+
+        } catch (SQLException ex) {
+        }
+
+    }
 }
