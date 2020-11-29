@@ -39,64 +39,64 @@
       <Pane fx:id="panePlaceholder" layoutY="130.0" prefHeight="570.0" prefWidth="900.0" style="-fx-background-color: transparent; -fx-background-image: url('resources/img/menu.png');" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0" />
       <Pane fx:id="paneUpdates" layoutX="900.0" prefHeight="700.0" prefWidth="300.0" style="-fx-background-color: transparent; -fx-background-image: url('resources/img/updates.png');" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="lblStdId1" layoutX="57.0" layoutY="227.0" text="0007608418">
+            <Label fx:id="lblLhId1" layoutX="160.0" layoutY="224.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblStdFac1" layoutX="57.0" layoutY="247.0" text="Faculty of Computing">
+            <Label fx:id="lblModule1" layoutX="56.0" layoutY="265.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblStdDeg1" layoutX="57.0" layoutY="267.0" text="Software Engineering">
+            <Label fx:id="lblAtd1" layoutX="145.0" layoutY="285.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblStdId2" layoutX="57.0" layoutY="320.0" text="0005887891">
+            <Label fx:id="lblLhId2" layoutX="160.0" layoutY="333.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblStdFac2" layoutX="57.0" layoutY="340.0" text="Faculty of Business">
+            <Label fx:id="lblModule2" layoutX="56.0" layoutY="374.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblStdDeg2" layoutX="57.0" layoutY="360.0" text="Marketing Management">
+            <Label fx:id="lblAtd2" layoutX="145.0" layoutY="394.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblLhId1" layoutX="56.0" layoutY="478.0" text="C2-002">
+            <Label fx:id="lblLhId3" layoutX="160.0" layoutY="444.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblModule1" layoutX="56.0" layoutY="498.0" text="SE with Java">
+            <Label fx:id="lblModule3" layoutX="56.0" layoutY="485.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblAtd1" layoutX="56.0" layoutY="518.0" text="1/400">
+            <Label fx:id="lblAtd3" layoutX="145.0" layoutY="505.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblLhId2" layoutX="56.0" layoutY="573.0" text="C2-L101">
+            <Label fx:id="lblLhId4" layoutX="160.0" layoutY="555.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblModule2" layoutX="56.0" layoutY="593.0" text="Internet of Things">
+            <Label fx:id="lblModule4" layoutX="56.0" layoutY="596.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblAtd2" layoutX="56.0" layoutY="613.0" text="1/400">
+            <Label fx:id="lblAtd4" layoutX="145.0" layoutY="616.0" text="-">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
          </children></Pane>

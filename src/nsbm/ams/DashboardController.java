@@ -10,11 +10,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.URL;
 import java.nio.file.Files;
-import static java.nio.file.Files.list;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -25,9 +22,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,14 +35,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -85,18 +81,6 @@ public class DashboardController implements Initializable {
     String flname;
     String imagename;
     @FXML
-    private Label lblStdId1;
-    @FXML
-    private Label lblStdFac1;
-    @FXML
-    private Label lblStdDeg1;
-    @FXML
-    private Label lblStdId2;
-    @FXML
-    private Label lblStdFac2;
-    @FXML
-    private Label lblStdDeg2;
-    @FXML
     private Label lblLhId1;
     @FXML
     private Label lblModule1;
@@ -108,6 +92,18 @@ public class DashboardController implements Initializable {
     private Label lblModule2;
     @FXML
     private Label lblAtd2;
+    @FXML
+    private Label lblLhId3;
+    @FXML
+    private Label lblModule3;
+    @FXML
+    private Label lblAtd3;
+    @FXML
+    private Label lblLhId4;
+    @FXML
+    private Label lblModule4;
+    @FXML
+    private Label lblAtd4;
 
     /**
      * Initializes the controller class.
@@ -118,7 +114,15 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        updateActivity();
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    showLecHalls();
+                });
+            }
+        }, 1000, 1000);
 
         Platform.runLater(() -> {
 
@@ -217,51 +221,47 @@ public class DashboardController implements Initializable {
 
     }
 
-    private void updateActivity() {
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-            @Override
-            public void run() {
+    public void showLecHalls() {
 
-                Connection con = DatabaseConnection.ConnectDatabase();
+        Connection con = DatabaseConnection.ConnectDatabase();
 
-                String lectureHall;
-                String lectureHallCap;
-                String moduleName;
-                String attendees;
+        String qry = "SELECT lecture_hall.lhid, lecture_hall.size, module.name, COUNT(module_date.mid) AS value_occurrence FROM module_date INNER JOIN module ON module_date.mid = module.mid INNER JOIN lecture_hall ON lecture_hall.mid = module_date.mid GROUP BY module_date.mid ORDER BY value_occurrence DESC LIMIT 4";
 
-                String qry = "SELECT * FROM lecture_hall WHERE mid IS NOT NULL";
+        Statement st;
+        ResultSet rs;
 
-                Statement st;
-                ResultSet rs;
+        try {
 
-                try {
+            st = con.createStatement();
+            rs = st.executeQuery(qry);
 
-                    st = con.createStatement();
-                    rs = st.executeQuery(qry);
+            int i = 0;
 
-                    List<String> listLhId = new ArrayList<String>();
-                    List<String> listSize = new ArrayList<String>();
+            while (rs.next()) {
+                i++;
 
-                    while (rs.next()) {
-                        lectureHall = rs.getString("lhid");
-                        lectureHallCap = rs.getString("size");
-                        listLhId.add(lectureHall);
-                        listSize.add(lectureHallCap);
-                        System.out.println(lectureHall);
-                        System.out.println(lectureHallCap);
-                    }
-
-                    String[] hallId = listLhId.toArray(new String[]{});
-                    String[] hallSize = listSize.toArray(new String[]{});
-
-                } catch (SQLException ex) {
+                if (i == 1) {
+                    lblLhId1.setText(rs.getString("lhid"));
+                    lblModule1.setText(rs.getString("name"));
+                    lblAtd1.setText(rs.getString("value_occurrence") + "/ " + rs.getString("size"));
+                } else if (i == 2) {
+                    lblLhId2.setText(rs.getString("lhid"));
+                    lblModule2.setText(rs.getString("name"));
+                    lblAtd2.setText(rs.getString("value_occurrence") + "/ " + rs.getString("size"));
+                } else if (i == 3) {
+                    lblLhId3.setText(rs.getString("lhid"));
+                    lblModule3.setText(rs.getString("name"));
+                    lblAtd3.setText(rs.getString("value_occurrence") + "/ " + rs.getString("size"));
+                } else if (i == 4) {
+                    lblLhId4.setText(rs.getString("lhid"));
+                    lblModule4.setText(rs.getString("name"));
+                    lblAtd4.setText(rs.getString("value_occurrence") + "/ " + rs.getString("size"));
                 }
 
             }
-        },
-                5000
-        );
-    }
 
+        } catch (SQLException ex) {
+        }
+
+    }
 }
