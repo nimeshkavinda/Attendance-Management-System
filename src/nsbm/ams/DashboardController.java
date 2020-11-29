@@ -119,10 +119,14 @@ public class DashboardController implements Initializable {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    showLecHalls();
+                    try {
+                        showLecHalls();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 });
             }
-        }, 1000, 1000);
+        }, 2000, 2000);
 
         Platform.runLater(() -> {
 
@@ -221,7 +225,7 @@ public class DashboardController implements Initializable {
 
     }
 
-    public void showLecHalls() {
+    public void showLecHalls() throws SQLException {
 
         Connection con = DatabaseConnection.ConnectDatabase();
 
@@ -261,6 +265,8 @@ public class DashboardController implements Initializable {
             }
 
         } catch (SQLException ex) {
+        } finally {
+            con.close();
         }
 
     }
