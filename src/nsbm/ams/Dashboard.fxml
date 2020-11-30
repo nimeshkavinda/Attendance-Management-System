@@ -32,7 +32,7 @@
                </font>
             </Label>
             <Hyperlink fx:id="linkSignout" layoutX="790.0" layoutY="54.0" onAction="#toLogin" text="Sign Out" />
-            <Hyperlink fx:id="linkManageacc" layoutX="685.0" layoutY="54.0" onAction="#toManageAcc" text="Manage Account" />
+            <Hyperlink fx:id="linkManageacc" layoutX="667.0" layoutY="54.0" onAction="#toManageAcc" text="Manage Account" />
             <Circle fx:id="picProfile" fill="WHITE" layoutX="105.0" layoutY="65.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: none;" />
          </children>
       </Pane>

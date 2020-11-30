@@ -18,16 +18,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -73,13 +70,6 @@ public class DashboardController implements Initializable {
     private Pane panePlaceholder;
     @FXML
     private Label lblNameAlt1;
-
-    Calendar cal;
-    int timeOfDay;
-    String empemail;
-    String empid;
-    String flname;
-    String imagename;
     @FXML
     private Label lblLhId1;
     @FXML
@@ -104,6 +94,13 @@ public class DashboardController implements Initializable {
     private Label lblModule4;
     @FXML
     private Label lblAtd4;
+    
+    Calendar cal;
+    int timeOfDay;
+    String empemail;
+    String empid;
+    String flname;
+    String imagename;
 
     /**
      * Initializes the controller class.

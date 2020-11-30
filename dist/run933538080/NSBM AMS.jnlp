@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="NSBM AMS.jnlp">
+  <information>
+    <title>NSBM AMS</title>
+    <vendor>Nimesh</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="lib\AbsoluteLayout.jar" size="10424" download="eager" />
+    <jar href="lib\commons-io-2.8.0.jar" size="285424" download="eager" />
+    <jar href="lib\javax.mail.jar" size="659033" download="eager" />
+    <jar href="lib\mysql-connector-java-8.0.22.jar" size="2389216" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="nsbm.ams.Main"  name="NSBM AMS" />
+  <update check="always"/>
+</jnlp>
