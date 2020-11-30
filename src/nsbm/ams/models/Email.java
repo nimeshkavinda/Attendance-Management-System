@@ -12,7 +12,6 @@ import java.sql.Statement;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.print.attribute.standard.Destination;
 import nsbm.ams.services.DatabaseConnection;
 
 /**

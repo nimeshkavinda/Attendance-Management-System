@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2020 at 10:47 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Generation Time: Nov 30, 2020 at 02:13 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -34,33 +33,6 @@ CREATE TABLE `attendance` (
   `date` varchar(30) NOT NULL,
   `day` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `attendance`
---
-
-INSERT INTO `attendance` (`atdid`, `stdid`, `date`, `day`) VALUES
-(106, 0007608418, '2020/11/29', 'Sun'),
-(107, 0007608418, '2020/11/29', 'Sun'),
-(108, 0007608418, '2020/11/29', 'Sun'),
-(109, 0007608418, '2020/11/29', 'Sun'),
-(110, 0007608418, '2020/11/29', 'Sun'),
-(111, 0007608418, '2020/11/29', 'Sun'),
-(112, 0007608418, '2020/11/29', 'Sun'),
-(113, 0007608418, '2020/11/29', 'Sun'),
-(114, 0007608418, '2020/11/29', 'Sun'),
-(115, 0007608418, '2020/11/29', 'Sun'),
-(116, 0007608418, '2020/11/29', 'Sun'),
-(117, 0007608418, '2020/11/29', 'Sun'),
-(118, 0007608418, '2020/11/29', 'Sun'),
-(119, 0007608418, '2020/11/29', 'Sun'),
-(120, 0007608418, '2020/11/29', 'Sun'),
-(121, 0007608418, '2020/11/29', 'Sun'),
-(122, 0007608418, '2020/11/29', 'Sun'),
-(123, 0007608418, '2020/11/29', 'Sun'),
-(124, 0007608418, '2020/11/29', 'Sun'),
-(125, 0007608418, '2020/11/29', 'Sun'),
-(126, 1234567890, '2020/11/29', 'Sun');
 
 -- --------------------------------------------------------
 
@@ -144,13 +116,6 @@ CREATE TABLE `employee` (
   `access_lvl` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `employee`
---
-
-INSERT INTO `employee` (`empid`, `fname`, `lname`, `email`, `mobile`, `password`, `access_lvl`) VALUES
-(14, 'Nimesh', 'Kavinda', 'nimesh@nsbm.lk', '0716956139', 'a', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -168,13 +133,13 @@ CREATE TABLE `lecture_hall` (
 --
 
 INSERT INTO `lecture_hall` (`lhid`, `size`, `mid`) VALUES
-('1', 150, 1),
-('10', 150, 6),
+('1', 150, NULL),
+('10', 150, NULL),
 ('11', 150, NULL),
-('12', 150, 16),
+('12', 150, NULL),
 ('13', 150, NULL),
-('14', 150, 23),
-('15', 150, 9),
+('14', 150, NULL),
+('15', 150, NULL),
 ('16', 400, NULL),
 ('17', 400, NULL),
 ('18', 400, NULL),
@@ -265,7 +230,9 @@ INSERT INTO `module_date` (`mdid`, `date`, `mid`) VALUES
 (11, '2020/11/29', 1),
 (12, '2020/11/29', 1),
 (13, '2020/11/29', 1),
-(14, '2020/11/29', 1);
+(14, '2020/11/29', 1),
+(15, '2020/11/30', 6),
+(16, '2020/11/30', 6);
 
 -- --------------------------------------------------------
 
@@ -289,14 +256,6 @@ CREATE TABLE `student` (
   `batch` varchar(30) NOT NULL,
   `did` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `student`
---
-
-INSERT INTO `student` (`stdid`, `fname`, `lname`, `dob`, `gender`, `nic`, `email`, `mobile`, `address`, `city`, `province`, `faculty`, `batch`, `did`) VALUES
-(0007608418, 'Nimesh', 'Kavinda', '2000/03/08', 'Male', '200006800341', 'nimeshkavinda13@gmail.com', '0716956139', '148/A, Horana Road', 'Padukka', 'Western', 'Faculty of Computing', 'Plymouth Batch 8', 4),
-(1234567890, 'Sample', 'Student', '2020/11/01', 'Male', '1', 'test@test.com', '1', 'test', 'test', 'test', 'Faculty of Business', 'Plymouth Batch 7', 1);
 
 -- --------------------------------------------------------
 
@@ -443,19 +402,19 @@ ALTER TABLE `time_table`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `atdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `atdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `module_date`
 --
 ALTER TABLE `module_date`
-  MODIFY `mdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `mdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
