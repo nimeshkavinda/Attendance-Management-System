@@ -1,4 +1,6 @@
 # Attendance Management System
  Java SE Group Project
  
- Developed Attendance Management System allows users to Create Account , Manage Account , Sign in /out , Register Students , Generate Attendance Report , Send Emails & allocate lecture halls as well. 
+<a href="https://ibb.co/6r4vYDY"><img src="https://i.ibb.co/FmBs686/Screenshot-2717.png" alt="Screenshot-2717" border="0"></a>
+<a href="https://ibb.co/f22JzyT"><img src="https://i.ibb.co/0cc5R6z/Screenshot-2736.png" alt="Screenshot-2736" border="0"></a>
+<a href="https://ibb.co/TbsGKB1"><img src="https://i.ibb.co/ZY0rH6S/Screenshot-2726.png" alt="Screenshot-2726" border="0"></a>
